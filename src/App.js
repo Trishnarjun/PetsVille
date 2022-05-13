@@ -1,10 +1,20 @@
-import "./App.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register"
+import Conversation from "./pages/conversation";
+import { BrowserRouter, Routes, Route } from 'react-router-dom' // to help us route the pages
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Mario is the best</h1>
-    </div>
+    <BrowserRouter>
+    <Routes>
+    <Route path="/" element={<Login/>}/>
+    <Route path="/Register" element={<Register/>}/>
+    <Route path="/Home" element={<Home/>}/>
+    <Route path="/Conversation" element={<Conversation/>}/>    
+    </Routes>
+    </BrowserRouter>
   );
 }
 
