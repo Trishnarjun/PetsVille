@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# PetsVille 
+##  A social networking app for pets, making pets less anti-social. Where you meet other pets in your vicinity. Where pet owners can find playdates for their pets, they can filter by distance, breed, and size of the meeting.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
