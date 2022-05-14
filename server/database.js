@@ -1,6 +1,6 @@
-const pg = require("pg").pool
+const Pool = require("pg").Pool;
 
-const pool = new pg({
+const pool = new Pool({
   user: "development",
   password: "development",
   host: "localhost",
