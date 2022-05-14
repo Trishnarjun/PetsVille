@@ -13,3 +13,27 @@ app.listen(PORT, () => {
     console.error("error!") 
 )
 
+//routues//
+
+//get all chats
+
+//update chats
+
+//delete chats
+
+//get all conversations
+
+//update conversations
+
+//delete all converstions
+
+// get all locations
+
+//get all profiles
+
+//update profiles
+
+//get all users
+
+//update a user
+
