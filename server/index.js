@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const PORT = process.env.PORT || 3001;
-const ENV = require("./environment");
+const pool = require("./database")
 
 app.use(cors());
 app.use(express.json());
@@ -12,3 +12,4 @@ app.listen(PORT, () => {
 }).then(
     console.error("error!") 
 )
+
