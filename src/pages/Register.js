@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     species: "",
     size: "",
@@ -18,7 +18,7 @@ const Register = () => {
       .post("http://localhost:3001/users/register", data)
       .then(function (response) {
         console.log(response);
-        history.push("/Home");
+        navigate.push("/Home");
       })
       .catch(function (error) {
         console.log(error);
@@ -77,14 +77,13 @@ const Register = () => {
       </div>
 
       <div className="sign-up-form__field-wrapper">
-        Image:
+        <label for="uploads">Choose the images you want to upload:</label>
         <input
-          type="image"
-          id="image"
-          alt="SignUp"
-          src=""
-          onChange={onChange}
-          value={data.image}
+          type="file"
+          id="uploads"
+          name="image"
+          accept=".jpg, .jpeg, .png, .gif"
+          multiple
         />
       </div>
 
