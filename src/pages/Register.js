@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+
 const Register = () => {
+  const history = useHistory();
   const [data, setData] = useState({
     species: "",
     size: "",
@@ -12,9 +15,10 @@ const Register = () => {
     event.preventDefault();
     console.log(data);
     axios
-      .post("/Register", data)
+      .post("http://localhost:3001/users/register", data)
       .then(function (response) {
         console.log(response);
+        history.push("/Home");
       })
       .catch(function (error) {
         console.log(error);
