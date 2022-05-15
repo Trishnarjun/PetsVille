@@ -5,7 +5,7 @@ const pool = require("../database")
 // //create chats
 router.post("/:id", (req,res) => {
   const {message, message_date, id} = req_body
-  pool.query("INSERT INTO chats (message, message_date, user_id) VALUES($1, $2, $3)", [message, message_date, user_id]).then((chats) => {
+  pool.query("INSERT INTO chats (message, message_date, user_id) VALUES($1, $2, $3)", [message, message_date, id]).then((chats) => {
     res.json(chats.rows)
   })
 });

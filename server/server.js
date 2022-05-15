@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3001;
 const pool = require("./database")
 const chats = require("./routes/chatRoutes")
 const users = require("./routes/userRoutes")
+const profiles = require("./routes/profileRoutes")
 
 app.use(cors());
 app.use(express.json());
@@ -38,5 +39,7 @@ app.use("/chats", chats)
 
 //update profiles
 
+
 //user routes
 app.use("/users", users)
+app.use("/profiles", profiles)
