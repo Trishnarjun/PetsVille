@@ -6,6 +6,7 @@ const pool = require("./database")
 const chats = require("./routes/chatRoutes")
 const users = require("./routes/userRoutes")
 const profiles = require("./routes/profileRoutes")
+const conversations = require("./routes/conversationRoutes")
 
 app.use(cors());
 app.use(express.json());
@@ -19,27 +20,18 @@ app.listen(3001, () => {
 //chat routes
 app.use("/chats", chats)
 
-//create conversations
+// conversation routes
+app.use("/conversations",conversations)
 
-//get all conversations
 
-//update conversations
-
-//delete converstions
-
-//delete all converstions //stretch
 
 //create locations
 
 // get all locations
 
-//create profile
-
-//get all profiles
-
-//update profiles
+//profile route
+app.use("/profiles", profiles)
 
 
 //user routes
 app.use("/users", users)
-app.use("/profiles", profiles)

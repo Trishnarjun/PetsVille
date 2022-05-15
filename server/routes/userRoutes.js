@@ -13,7 +13,7 @@ router.get("/", (req,res) => {
 //create a user
 router.post("/register", (req,res) => {
   const {name, email, password, location_id} = req_body
-  pool.query("INSERT INTO users (name, email, password, location_id) VALUES($1, $2, $3, $4)", [message, message_date, user_id]).then((users) => {
+  pool.query("INSERT INTO users (name, email, password, location_id) VALUES($1, $2, $3, $4)", [name, email, password, location_id]).then((users) => {
     res.json(users.rows)
   })
 });
