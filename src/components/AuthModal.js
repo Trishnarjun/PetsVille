@@ -1,5 +1,5 @@
 import { useState } from "react"
-const AuthModal = ({ setShowModal, setIsSignUp, isSignup }) => {
+const AuthModal = ({ setShowModal, isSignup }) => {
   const [ email, setEmail] = useState(null)
   const [ password, setPassword] = useState(null)
   const [ confirmPassword, setConfirmPassword] = useState(null)
@@ -32,7 +32,8 @@ const AuthModal = ({ setShowModal, setIsSignUp, isSignup }) => {
       <div className="close-icon" onClick ={handleClick}>ⓧ</div>
       <h2>{isSignup ? 'CREATE ACCOUNT' : 'LOGIN'}</h2>
       <form onSubmit={handleSubmit}>
-        <input 
+
+          <input 
             type="email"
             id="email"
             name="email"
