@@ -4,7 +4,7 @@ const pool = require("../database")
 
 //create locations
 router.post("/:id", (req,res) => {
-  const {lng, lat} = req_body
+  const {lng, lat} = req.body
   pool.query("INSERT INTO locations (lng, lat) VALUES ($1, $2)", [lng, lat]).then((locations) => {
     res.json(locations.rows)
   })

@@ -1,0 +1,23 @@
+/* .sign-up-form {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: auto;
+}
+.sign-up-form__field-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+label {
+  display: none;
+}
+
+textarea,
+select,
+input,
+label {
+  margin: 5px 5px;
+  width: 100%;
+} */
