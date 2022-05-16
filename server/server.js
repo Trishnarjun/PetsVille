@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const pool = require("./database")
 const chats = require("./routes/chatRoutes")
 const users = require("./routes/userRoutes")
@@ -12,7 +12,7 @@ const locations = require("./routes/locationRoutes")
 app.use(cors());
 app.use(express.json());
 
-app.listen(3001, () => {
+app.listen(3002, () => {
   console.log("server has started on port 3001")
 })
 
