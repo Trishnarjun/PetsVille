@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-const PORT = process.env.PORT || 3001;
 const pool = require("./database")
 const chats = require("./routes/chatRoutes")
 const users = require("./routes/userRoutes")
