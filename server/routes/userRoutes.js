@@ -1,7 +1,7 @@
+const { application } = require('express');
 const express = require('express')
 const router = express.Router()
 const pool = require("../database")
-
 
 //get all users
 router.get("/", (req,res) => {
@@ -12,8 +12,8 @@ router.get("/", (req,res) => {
 
 //create a user
 router.post("/register", (req,res) => {
-  const {name, email, password, location_id} = req_body
-  pool.query("INSERT INTO users (name, email, password, location_id) VALUES($1, $2, $3, $4)", [name, email, password, location_id]).then((users) => {
+  const {email, password, lng, lat} = req.body
+  pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((users) => {
     res.json(users.rows)
   })
 });
