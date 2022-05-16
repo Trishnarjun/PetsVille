@@ -26,7 +26,7 @@ CREATE TABLE profiles (
   size VARCHAR(255) NOT NULL,
   breed VARCHAR(255) NOT NULL,
   species VARCHAR(255) NOT NULL,
-  age VARCHAR(255) NOT NULL,
+  age INTEGER NOT NULL,
   picture VARCHAR(225)
 );
 
