@@ -48,15 +48,15 @@ const Register = () => {
 
       <form className="form-box" onSubmit={onSubmit}>
       <section>
-        <label> Name </label>
+        Name: 
         <input
-          id="Name"
+          id="name"
           type="text"
           name="name"
           placeholder="name"
           required={true}
           onChange={onChange}
-          value={data.Name}
+          value={data.name}
         /><br/>
         Species:
         <input
@@ -114,7 +114,7 @@ const Register = () => {
           placeholder="species"
           onChange={onChange}
           value={data.species}
-        />
+        /> 'a
       </div>
 
       <div className="sign-up-form__field-wrapper">
