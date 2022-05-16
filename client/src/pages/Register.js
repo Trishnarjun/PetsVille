@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../Register-Form.css";
 
 const Register = () => {
-   
+
   const navigate = useNavigate();
   const [data, setData] = useState({
     pet_name: "",
@@ -78,7 +78,7 @@ const Register = () => {
           value={data.size}
         /><br/>
         Breed:
-         <input
+        <input
           type="text"
           name="breed"
           placeholder="breed"
@@ -106,69 +106,11 @@ const Register = () => {
         />
       
           </section>
-     
-      {/* <div className="sign-up-form__field-wrapper">
-        Species:
-        <input
-          type="text"
-          name="species"
-          placeholder="species"
-          onChange={onChange}
-          value={data.species}
-        /> 'a
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Size:
-        <input
-          type="text"
-          name="size"
-          placeholder="size"
-          onChange={onChange}
-          value={data.size}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Breed(Optional):
-        <input
-          type="text"
-          name="breed"
-          placeholder="breed"
-          onChange={onChange}
-          value={data.breed}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Age:
-        <input
-          type="text"
-          name="age"
-          placeholder="age"
-          onChange={onChange}
-          value={data.age}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        <label for="uploads">Choose the images you want to upload:</label>
-        <input
-          type="file"
-          id="uploads"
-          name="image"
-          accept=".jpg, .jpeg, .png, .gif"
-          multiple
-        />
-      </div> */}
-
       <button className="sign-up-form-button">Sign Up</button>
       
       </form>
     </div>
-    
     </>
-   
   );
 };
 export default Register;
