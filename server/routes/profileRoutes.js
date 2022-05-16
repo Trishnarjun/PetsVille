@@ -18,11 +18,7 @@ router.get("/", (req,res) => {
 });
 
 //update profiles
-<<<<<<< HEAD
-router.post("/id", (req,res) => {
-=======
 router.post("/:id", (req,res) => {
->>>>>>> f3cd5409f122428a330f9ec1bc5fe2a575dfa791
   const {user_id, pet_name, size, breed, species, age, picture} = req.body
   pool.query("UPDATE profiles pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7", [pet_name, size, breed, species, age, picture, user_id]).then((chats) => {
     

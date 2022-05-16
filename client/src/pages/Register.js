@@ -15,6 +15,7 @@ const Register = () => {
     age: "",
     image: "",
   });
+
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(data);
