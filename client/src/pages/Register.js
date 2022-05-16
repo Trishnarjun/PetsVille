@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../Register-Form.css";
 
 const Register = () => {
-   
+
   const navigate = useNavigate();
   const [data, setData] = useState({
     pet_name: "",
@@ -18,6 +18,7 @@ const Register = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(data);
+    console.log("is it changing")
     axios
       .post("http://localhost:3002/profiles", data)
       .then(function (response) {
@@ -56,7 +57,7 @@ const Register = () => {
           placeholder="name"
           required={true}
           onChange={onChange}
-          value={data.name}
+          value={data.pet_name}
         /><br/>
         Species:
         <input
@@ -77,7 +78,7 @@ const Register = () => {
           value={data.size}
         /><br/>
         Breed:
-         <input
+        <input
           type="text"
           name="breed"
           placeholder="breed"
@@ -106,15 +107,11 @@ const Register = () => {
       
           </section>
      
-     
-
-      <button className="sign-up-form-button">Sign Up</button>
+          <button className="sign-up-form-button">Sign Up</button>
       
       </form>
     </div>
-    
     </>
-   
   );
 };
 export default Register;
