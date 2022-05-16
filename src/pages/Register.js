@@ -1,10 +1,14 @@
 import { useState } from "react";
+import Nav from '../components/Nav';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Register-Form.css";
 
 const Register = () => {
+   
   const navigate = useNavigate();
   const [data, setData] = useState({
+    Name: "",
     species: "",
     size: "",
     breed: "",
@@ -30,9 +34,79 @@ const Register = () => {
       return { ...current, [event.target.name]: event.target.value };
     });
   };
+
   return (
-    <form id="sign-up-form" className="sign-up-form" onSubmit={onSubmit}>
-      <div className="sign-up-form__field-wrapper">
+
+    <>
+      <Nav
+        minimal={true}
+        setShowModal={() => {}}
+        showModal={false}
+      />
+    
+      <div className="sign-up-form">
+
+      <form className="form-box" onSubmit={onSubmit}>
+      <section>
+        <label> Name </label>
+        <input
+          id="Name"
+          type="text"
+          name="name"
+          placeholder="name"
+          required={true}
+          onChange={onChange}
+          value={data.Name}
+        /><br/>
+        Species:
+        <input
+          type="text"
+          name="species"
+          placeholder="species"
+          required={true}
+          onChange={onChange}
+          value={data.species}
+          /><br/>
+          Size:
+        <input
+          type="text"
+          name="size"
+          placeholder="size"
+          required={true}
+          onChange={onChange}
+          value={data.size}
+        /><br/>
+        Breed:
+         <input
+          type="text"
+          name="breed"
+          placeholder="breed"
+          required={true}
+          onChange={onChange}
+          value={data.breed}
+        /><br/>
+        Age:
+        <input
+          id="age"
+          type="number"
+          name="age"
+          placeholder="age"
+          required={true}
+          onChange={onChange}
+          value={data.age}
+        /><br/>
+        <label for="uploads">Choose the images you want to upload:</label>
+        <input
+          type="file"
+          id="uploads"
+          name="image"
+          accept=".jpg, .jpeg, .png, .gif"
+          multiple
+        />
+      
+          </section>
+     
+      {/* <div className="sign-up-form__field-wrapper">
         Species:
         <input
           type="text"
@@ -85,12 +159,15 @@ const Register = () => {
           accept=".jpg, .jpeg, .png, .gif"
           multiple
         />
-      </div>
+      </div> */}
 
-      <div className="sign-up-form__field-wrapper">
-        <button>Sign Up</button>
-      </div>
-    </form>
+      <button className="sign-up-form-button">Sign Up</button>
+      
+      </form>
+    </div>
+    
+    </>
+   
   );
 };
 export default Register;
