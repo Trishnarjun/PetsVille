@@ -8,7 +8,7 @@ const Register = () => {
    
   const navigate = useNavigate();
   const [data, setData] = useState({
-    Name: "",
+    pet_name: "",
     species: "",
     size: "",
     breed: "",
@@ -18,8 +18,9 @@ const Register = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(data);
+    console.log("is it changing")
     axios
-      .post("http://localhost:3001/users", data)
+      .post("http://localhost:3002/profiles", data)
       .then(function (response) {
         console.log(response);
         navigate.push("/Home");
@@ -52,11 +53,11 @@ const Register = () => {
         <input
           id="name"
           type="text"
-          name="name"
+          name="pet_name"
           placeholder="name"
           required={true}
           onChange={onChange}
-          value={data.name}
+          value={data.pet_name}
         /><br/>
         Species:
         <input
