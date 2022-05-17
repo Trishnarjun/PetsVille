@@ -3,24 +3,16 @@ const router = express.Router();
 const pool = require("../database");
 
 //create profile
-<<<<<<< HEAD
-router.post("/:id", (req, res) => {
-  const { user_id, pet_name, size, breed, species, age, picture } = req_body;
+router.post("/", (req, res) => {
+  const { user_id, pet_name, size, breed, species, age, picture } = req.body;
   pool
     .query(
       "INSERT INTO profiles (user_id, pet_name, size, breed, species, age, picture) VALUES($1, $2, $3, $4, $5, $6, $7)",
-      [user_id, Name, size, breed, species, age, picture]
+      [user_id, pet_name, size, breed, species, age, picture]
     )
     .then((profile) => {
       res.json(profile.rows);
     });
-=======
-router.post("/", (req,res) => {
-  const {user_id, pet_name, size, breed, species, age, picture} = req.body
-  pool.query("INSERT INTO profiles (user_id, pet_name, size, breed, species, age, picture) VALUES($1, $2, $3, $4, $5, $6, $7)", [user_id, pet_name, size, breed, species, age, picture]).then((profile) => {
-    res.json(profile.rows);
-  })
->>>>>>> f12b2e7651135d2cab9c08c627e9c231891836e7
 });
 
 //get all profiles
@@ -31,22 +23,12 @@ router.get("/", (req, res) => {
 });
 
 //update profiles
-<<<<<<< HEAD
 router.post("/:id", (req, res) => {
-  const { user_id, Name, size, breed, species, age, picture } = req.body;
+  const { user_id, pet_name, size, breed, species, age, picture } = req.body;
   pool
     .query(
-      "UPDATE profiles Name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
-      [Name, size, breed, species, age, picture, user_id]
+      "UPDATE profiles pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
+      [pet_name, size, breed, species, age, picture, user_id]
     )
     .then((chats) => {});
-=======
-router.post("/:id", (req,res) => {
-  const {user_id, pet_name, size, breed, species, age, picture} = req.body
-  pool.query("UPDATE profiles pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7", [pet_name, size, breed, species, age, picture, user_id]).then((chats) => {
-    
-  })
->>>>>>> f12b2e7651135d2cab9c08c627e9c231891836e7
 });
-
-module.exports = router;

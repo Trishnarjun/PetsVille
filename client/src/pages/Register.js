@@ -17,7 +17,7 @@ const Register = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(data);
-    console.log("is it changing")
+    console.log("is it changing");
     axios
       .post("http://localhost:3002/profiles", data)
       .then(function (response) {
@@ -38,17 +38,15 @@ const Register = () => {
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
-
-<<<<<<< HEAD
       <div className="sign-up-form">
         <form className="form-box" onSubmit={onSubmit}>
           <section>
             Name:
             <input
-              id="pet_name"
+              id="name"
               type="text"
               name="pet_name"
-              placeholder="Name"
+              placeholder="name"
               required={true}
               onChange={onChange}
               value={data.pet_name}
@@ -103,122 +101,7 @@ const Register = () => {
               accept=".jpg, .jpeg, .png, .gif"
               multiple
             />
-=======
-      <form className="form-box" onSubmit={onSubmit}>
-      <section>
-        Name: 
-        <input
-          id="name"
-          type="text"
-          name="pet_name"
-          placeholder="name"
-          required={true}
-          onChange={onChange}
-          value={data.pet_name}
-        /><br/>
-        Species:
-        <input
-          type="text"
-          name="species"
-          placeholder="species"
-          required={true}
-          onChange={onChange}
-          value={data.species}
-          /><br/>
-          Size:
-        <input
-          type="text"
-          name="size"
-          placeholder="size"
-          required={true}
-          onChange={onChange}
-          value={data.size}
-        /><br/>
-        Breed:
-         <input
-          type="text"
-          name="breed"
-          placeholder="breed"
-          required={true}
-          onChange={onChange}
-          value={data.breed}
-        /><br/>
-        Age:
-        <input
-          id="age"
-          type="number"
-          name="age"
-          placeholder="age"
-          required={true}
-          onChange={onChange}
-          value={data.age}
-        /><br/>
-        <label for="uploads">Choose the images you want to upload:</label>
-        <input
-          type="file"
-          id="uploads"
-          name="image"
-          accept=".jpg, .jpeg, .png, .gif"
-          multiple
-        />
-      
->>>>>>> f12b2e7651135d2cab9c08c627e9c231891836e7
           </section>
-
-          {/* <div className="sign-up-form__field-wrapper">
-        Species:
-        <input
-          type="text"
-          name="species"
-          placeholder="species"
-          onChange={onChange}
-          value={data.species}
-        /> 'a
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Size:
-        <input
-          type="text"
-          name="size"
-          placeholder="size"
-          onChange={onChange}
-          value={data.size}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Breed(Optional):
-        <input
-          type="text"
-          name="breed"
-          placeholder="breed"
-          onChange={onChange}
-          value={data.breed}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        Age:
-        <input
-          type="text"
-          name="age"
-          placeholder="age"
-          onChange={onChange}
-          value={data.age}
-        />
-      </div>
-
-      <div className="sign-up-form__field-wrapper">
-        <label for="uploads">Choose the images you want to upload:</label>
-        <input
-          type="file"
-          id="uploads"
-          name="image"
-          accept=".jpg, .jpeg, .png, .gif"
-          multiple
-        />
-      </div> */}
 
           <button className="sign-up-form-button">Sign Up</button>
         </form>
@@ -227,7 +110,3 @@ const Register = () => {
   );
 };
 export default Register;
-
-//<a id="sign-up-form__cancel" href="#">
-//Cancel
-//</a>
