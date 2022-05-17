@@ -1,0 +1,90 @@
+body {
+  background-color: #D3F3EE;
+}
+
+.profiles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0% 30% 0%;
+}
+
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  background-color: white;
+
+  
+}
+
+.profile-box > div {
+  margin: 10px;
+  padding: 10px;
+}
+
+@media (max-width: 800px) {
+  .profiles {
+    flex-direction: column;
+    margin: 0%;
+  }
+}
+
+
+
+
+
+/* *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  
+}
+
+.sign-up-form-button {
+  border-radius: 1rem;
+  border: 0;
+  font-size: 1.5rem;
+  height: 2rem;
+  line-height: 1.2rem;
+  margin-top: 15px;
+  margin-right: 1rem;
+  width: 8rem;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  color: rgba(6, 59, 233, 0.493);
+  background-color: rgb(204, 200, 200);
+}
+
+.sign-up-form__field-wrapper {
+  text-align: center;
+} 
+
+.form-box{
+  
+  max-width: 50%;
+  font-size: 25px ;
+  height: 100vh;
+  
+  margin: 0vw;
+  padding: 5vw ;
+  position:relative; 
+
+}
+
+.form-box input, textarea{
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0.8vw;
+  border:0;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.form-box textarea{
+  height: 5vh;
+} */
