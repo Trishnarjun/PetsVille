@@ -32,18 +32,22 @@ const AuthModal = ({ setShowModal, isSignup }) => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('handleSubmit')
     try {
       if( isSignup && ( password !== confirmPassword)) {
         setError('Passwords need to match!')
       return
     } 
-    const response =  axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
+    const response = await axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
+    console.log("response", response)
+    const success = response.status === 200
 
-    const success = response.status === 201
+    if (success) {
+      navigate('/Register')
+    }
 
-    if (success) navigate('/register')
 
     } catch (error) {
       console.log(error)

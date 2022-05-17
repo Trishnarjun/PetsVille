@@ -98,7 +98,7 @@ const Register = () => {
           onChange={onChange}
           value={data.age}
         /><br/>
-        <label for="uploads">Choose the images you want to upload:</label>
+        <label htmlFor="uploads">Choose the images you want to upload:</label>
         <input
           type="file"
           id="uploads"
