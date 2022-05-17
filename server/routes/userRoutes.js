@@ -10,7 +10,9 @@ const bcrypt = require('bcrypt')
 router.get("/", (req,res) => {
   pool.query("SELECT * FROM users").then((users) => {
     res.json(users.rows)
-  })
+  }).catch(err => {
+    res.send(err).status(400)
+  }) 
 });
 
 //create a user
