@@ -1,4 +1,4 @@
-import logo from '../Images/logo.png'
+import logo from '../Images/logo7.png'
 
 const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}) => {
 

@@ -1,9 +1,16 @@
-import { useState } from "react"
-const AuthModal = ({ setShowModal, setIsSignUp, isSignup }) => {
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+
+const AuthModal = ({ setShowModal, isSignup }) => {
   const [ email, setEmail] = useState(null)
   const [ password, setPassword] = useState(null)
   const [ confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
+  const [ lng, setlng] = useState(null)
+  const [ lat, setlat] = useState(null)
+
+  let navigate = useNavigate()
 
   console.log(email, password, confirmPassword)
   
@@ -11,14 +18,32 @@ const AuthModal = ({ setShowModal, setIsSignUp, isSignup }) => {
   const handleClick = () => {
     setShowModal(false)
   }
- 
+
+  useEffect(() => {
+    
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setlat(position.coords.latitude)
+      setlng(position.coords.longitude)
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+    
+  }, [])
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault()
     try {
       if( isSignup && ( password !== confirmPassword)) {
         setError('Passwords need to match!')
-      }
-      console.log('make a post request to our database')
+      return
+    } 
+    const response =  axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
+
+    const success = response.status === 201
+
+    if (success) navigate('/register')
 
     } catch (error) {
       console.log(error)
@@ -32,7 +57,8 @@ const AuthModal = ({ setShowModal, setIsSignUp, isSignup }) => {
       <div className="close-icon" onClick ={handleClick}>ⓧ</div>
       <h2>{isSignup ? 'CREATE ACCOUNT' : 'LOGIN'}</h2>
       <form onSubmit={handleSubmit}>
-        <input 
+
+          <input 
             type="email"
             id="email"
             name="email"

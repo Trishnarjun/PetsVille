@@ -11,6 +11,11 @@ html, body {
   font-family: sans-serif;
 }
 
+.primary-title {
+  font-size: 90px;
+  color: rgb(255,255,255);
+}
+
 .primary-button {
   color: #fff;
   text-transform: uppercase;
@@ -58,14 +63,19 @@ nav {
 
  nav .nav-button {
 
-  color: rgb(62, 91, 254);
-  background-color: rgb(255, 255, 255);
-  font-size: 20px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 20px;
-  margin-bottom: 80px;
-  margin-right: 20px;
+  border-radius: 1rem;
+  border: 0;
+  font-size: 1.5rem;
+  height: 2rem;
+  line-height: 1.2rem;
+  margin-top: 25px;
+  margin-right: 1rem;
+  width: 8rem;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255,255,255);
+  color: rgb(255,255,255);
+  background-color: transparent;
 }
 
 nav .nav-button:disabled {
@@ -74,8 +84,7 @@ nav .nav-button:disabled {
 }
 
 nav .logo-container {
-  width: 15
-  0px;
+  width: 145px;
   margin: 15px;
 }
 
@@ -91,7 +100,7 @@ nav .logo-container .logo {
   height: 100vh;
   position: fixed;
   background: 
-  /* rgb(255, 255, 255), 0%, 100%; */
+   /* rgb(255, 255, 255), 0%, 100%; */
 
   linear-gradient(
         to bottom,
@@ -131,3 +140,4 @@ nav .logo-container .logo {
   margin: 8px;
   font-size: 17px;
 }
+

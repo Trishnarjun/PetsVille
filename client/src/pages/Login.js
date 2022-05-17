@@ -22,7 +22,7 @@ const Login = () => {
       showModal={showModal}
       setIsSignup={setIsSignup}/>
     <div className="login">
-      <h1> Welcome to PetsVille </h1>
+      <h1 className="primary-title">All About Pets</h1>
       <button className="primary-button" onClick={handleClick}>
         {authToken ? 'Signout' : 'Create Account' }
     </button>  
@@ -30,7 +30,7 @@ const Login = () => {
     {/* basically saying if showModal is true then show the authmodal */}
 
     {showModal && (
-      <AuthModal setShowModal={setShowModal} setIsSignUp={setIsSignup} isSignup={isSignup}/>
+      <AuthModal setShowModal={setShowModal}  isSignup={isSignup}/>
     )}
 
   </div>
