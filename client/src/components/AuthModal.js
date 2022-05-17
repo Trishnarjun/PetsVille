@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 const AuthModal = ({ setShowModal, isSignup }) => {
@@ -7,6 +7,8 @@ const AuthModal = ({ setShowModal, isSignup }) => {
   const [ password, setPassword] = useState(null)
   const [ confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
+  const [ lng, setlng] = useState(null)
+  const [ lat, setlat] = useState(null)
 
   let navigate = useNavigate()
 
@@ -16,7 +18,20 @@ const AuthModal = ({ setShowModal, isSignup }) => {
   const handleClick = () => {
     setShowModal(false)
   }
- 
+
+  useEffect(() => {
+    
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setlat(position.coords.latitude)
+      setlng(position.coords.longitude)
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+    
+  }, [])
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault()
     try {
@@ -24,8 +39,7 @@ const AuthModal = ({ setShowModal, isSignup }) => {
         setError('Passwords need to match!')
       return
     } 
-    
-    const response =  axios.post('http://localhost:3002/users/register', {email, password})
+    const response =  axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
 
     const success = response.status === 201
 

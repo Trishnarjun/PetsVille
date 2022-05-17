@@ -14,7 +14,7 @@ router.get("/", (req,res) => {
 router.post("/register", (req,res) => {
   const {email, password, lng, lat} = req.body
   pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((users) => {
-    res.json(users.rows)
+  
   })
 });
 

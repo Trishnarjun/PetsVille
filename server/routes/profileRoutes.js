@@ -32,3 +32,5 @@ router.post("/:id", (req, res) => {
     )
     .then((chats) => {});
 });
+
+module.exports = router;
