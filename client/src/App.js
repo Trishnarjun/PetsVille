@@ -4,7 +4,6 @@ import Register from "./pages/Register"
 import Conversation from "./pages/conversation";
 import { BrowserRouter, Routes, Route } from 'react-router-dom' // to help us route the pages
 
-
 const App = () => {
   return (
     <BrowserRouter>
