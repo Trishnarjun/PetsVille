@@ -21,24 +21,27 @@ const Home = () => {
     fetchProfilesResponse();
   }, []);
 
+  const profileDistances = []
+
   const profilesDisplay = () => profiles.map((profile) => {
 
     const toRad = (d) => {
       return d * Math.PI / 180;
     };
 
+    
     const profileDistance = () => {
       const R = 6371;
       const dLat = toRad(parseFloat(profile.lat) - 43.69702911376953);
       const dLng = toRad(parseFloat(profile.lng) - (-79.65017700195312));
       const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(43.69702911376953)) * Math.cos(toRad(profile.lat)) *
-        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      Math.cos(toRad(43.69702911376953)) * Math.cos(toRad(profile.lat)) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c;
       return d; // distance in KM
-
     };
+    profileDistances.push(profileDistance())
     
     return (
       <>
@@ -60,9 +63,9 @@ const Home = () => {
           <div>Breed: {profile.breed}</div>
           <div>Kind: {profile.species}</div>
           <div>Age: {profile.age}</div>
+          <button>Chat</button>
         </div>
         <div>
-          <button></button>
         </div>
         </>
       )}
@@ -71,7 +74,7 @@ const Home = () => {
     )
   })
 
-
+  console.log(profileDistances);
   return (
       <>
       <Nav
