@@ -17,6 +17,8 @@ body {
   background-color: white;
   width: 10rem;
   padding: 3em;
+  justify-content: center;
+  align-items: center;
 
   
 }
