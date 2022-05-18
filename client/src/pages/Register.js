@@ -15,7 +15,6 @@ const Register = () => {
     image: "",
   });
 
- 
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(data);
@@ -43,7 +42,7 @@ const Register = () => {
       <div className="sign-up-form">
         <form className="form-box" onSubmit={onSubmit}>
           <section>
-            Name:
+            <h3 className="header"> Create Account</h3>
             <input
               id="name"
               type="text"
@@ -54,7 +53,6 @@ const Register = () => {
               value={data.pet_name}
             />
             <br />
-            Species:
             <input
               type="text"
               name="species"
@@ -64,7 +62,6 @@ const Register = () => {
               value={data.species}
             />
             <br />
-            Size:
             <input
               type="text"
               name="size"
@@ -74,7 +71,6 @@ const Register = () => {
               value={data.size}
             />
             <br />
-            Breed:
             <input
               type="text"
               name="breed"
@@ -84,7 +80,6 @@ const Register = () => {
               value={data.breed}
             />
             <br />
-            Age:
             <input
               id="age"
               type="number"

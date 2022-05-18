@@ -1,7 +1,26 @@
+section {
+  display: flex;
+  justify-content: space-around;
+  margin: 2px;
+  flex-direction: column;
+}
+.header {
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+.sign-up-form {
+  top: 175px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+  height: 400px;
+  background-color: rgb(21, 20, 20);
+  border-radius: 10px;
+  padding: 40px;
+}
 .form-box form {
   display: flex-direction;
   justify-content: center;
-
 }
 
 .form-box form section {
@@ -10,70 +29,38 @@
   padding: 20px;
 }
 
-.form-box form input {
-  padding: 15px 30px;
-  margin: 10px 0;
+.form-box input {
   font-size: 15px;
-  border: solid 20px;
+  height: 25px;
 }
 
-
-
-
-
-
-
-
-/* *{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 1px solid red;
-  
+.form-box form input {
+  padding: 10px;
+  margin: 10px;
 }
 
 .sign-up-form-button {
-  border-radius: 1rem;
-  border: 0;
-  font-size: 1.5rem;
-  height: 2rem;
-  line-height: 1.2rem;
-  margin-top: 15px;
-  margin-right: 1rem;
-  width: 8rem;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgb(0, 0, 0);
-  color: rgba(6, 59, 233, 0.493);
-  background-color: rgb(204, 200, 200);
-}
-
-.sign-up-form__field-wrapper {
+  background-color: #28282af6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 16px 32px;
   text-align: center;
-} 
-
-.form-box{
-  
-  max-width: 50%;
-  font-size: 25px ;
-  height: 100vh;
-  
-  margin: 0vw;
-  padding: 5vw ;
-  position:relative; 
-
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.form-box input, textarea{
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin: 0.8vw;
-  border:0;
-  border-radius: 5px;
-  font-size: 20px;
+.sign-up-form-button:hover {
+  opacity: 1;
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.24), 0 7px 25px 0 rgba(0, 0, 0, 0.19);
 }
-
-.form-box textarea{
-  height: 5vh;
-} */
+.sign-up-form-button:active {
+  background-color: #18181a;
+  box-shadow: 0 2px rgb(24, 23, 23);
+  transform: translateY(2px);
+}
