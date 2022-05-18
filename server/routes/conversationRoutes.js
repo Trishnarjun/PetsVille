@@ -2,7 +2,14 @@ const express = require('express')
 const router = express.Router()
 const pool = require("../database")
 const http = require("http"); // required to connect the server to socket io
-const cors = require("cors"); 4.4k (gzipped: 1.9k))
+const { Server } = require("socket.io")
+
+const io = new Server() 
+
+
+
+
+
 
 //create conversations
 router.post("/:id", (req,res) => {

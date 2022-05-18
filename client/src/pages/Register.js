@@ -25,7 +25,7 @@ const Register = () => {
       .post("http://localhost:3002/profiles", data)
       .then(function (response) {
         console.log(response);
-        navigate.push("/Home");
+        navigate("/Home");
       })
       .catch(function (error) {
         console.log(error);
