@@ -14,7 +14,7 @@ router.post("/", (req,res) => {
 
 //get all profiles
 router.get("/", (req,res) => {
-  pool.query("SELECT * FROM profiles").then((profile) => {
+  pool.query("SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id ").then((profile) => {
     res.json(profile.rows)
   }).catch(err => {
     res.send(err).status(400)
