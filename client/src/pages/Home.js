@@ -52,7 +52,6 @@ const Home = () => {
           <div>{profile.pet_name}</div>
           <div>{Math.round(profileDistance() * 10) / 10} Km</div>
         </div>
-        
         )}
       {isShown === profile.id  && (
         <>
