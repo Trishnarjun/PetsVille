@@ -54,7 +54,7 @@ server.listen(PORT, () => {
 
 
 app.get("/", (req,res) => {
-    res.send("Welcome to the the API SERVER")
+    res.json("Welcome to the the API SERVER")
 });
 
 //chat routes
