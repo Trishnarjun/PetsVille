@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import Nav from '../components/Nav';
 import "../home.css";
 import React, { useEffect, useState }  from 'react';
+
 const Home = () => {
+
   const [profiles, setProfile] = useState([])
   // for filtering by distace //
   //const [distanceIndex, setDistanceIndex] = useState([]) 
@@ -20,6 +23,13 @@ const Home = () => {
     } 
     fetchProfilesResponse();
   }, []);
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/conversation`; 
+    navigate(path);
+  }
+
 
   const profileDistances = []
 
@@ -63,7 +73,7 @@ const Home = () => {
           <div>Breed: {profile.breed}</div>
           <div>Kind: {profile.species}</div>
           <div>Age: {profile.age}</div>
-          <button>Chat</button>
+          <button onClick={routeChange}>Chat</button>
         </div>
         <div>
         </div>
