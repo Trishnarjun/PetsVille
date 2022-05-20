@@ -8,8 +8,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  lng NUMERIC NOT NULL,
-  lat NUMERIC NOT NULL
+  lng double precision NOT NULL,
+  lat double precision NOT NULL
 );
 
 
