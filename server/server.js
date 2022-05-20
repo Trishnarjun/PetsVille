@@ -10,8 +10,17 @@ const conversations = require("./routes/conversationRoutes")
 const http = require("http")
 const locations = require("./routes/locationRoutes")
 const { Server } = require("socket.io") 
+const cookieSession = require("cookie-session")
+
 
 app.use(cors());
+app.use(cookieSession({
+  name: 'session',
+  keys: ["super secret"],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours));
+}))
+
 app.use(express.json());
 
 const server = http.createServer(app);

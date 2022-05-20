@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useCookies } from "react-cookie"
 import { useNavigate } from "react-router-dom"
 
 const AuthModal = ({ setShowModal, isSignup }) => {
@@ -10,7 +9,6 @@ const AuthModal = ({ setShowModal, isSignup }) => {
   const [error, setError] = useState(null)
   const [ lng, setlng] = useState(null)
   const [ lat, setlat] = useState(null)
-  const [cookies, setCookie, removeCookie] = useCookies(null)
 
   let navigate = useNavigate()
 
@@ -37,23 +35,24 @@ const AuthModal = ({ setShowModal, isSignup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('handleSubmit')
+
     try {
-      if(isSignup && ( password !== confirmPassword)) {
+      if( isSignup && ( password !== confirmPassword)) {
         setError('Passwords need to match!')
       return
     } 
-    const response = await axios.post(`http://localhost:3002${isSignup ? 'signup' : 'login'}`, {email, password, lng, lat})
 
-    setCookie('AuthToken', response.data.token)
-    setCookie('UserId', response.data.userId)
-
+    // const response = await axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
+    const options = isSignup ? {email, password, lng, lat} : {email, password}
+    const response = await axios.post(`http://localhost:3002/users/${isSignup ? 'register' : 'login'}`, options)
+  
 
     console.log("response", response)
     const success = response.status === 200
+ 
 
-    if (success && isSignup) navigate ('/Register')
-    if (success && !isSignup) navigate ('/Home')
-    
+    if (success && isSignup) navigate('/Register')
+    if (success && !isSignup) navigate('/Home')
 
 
     } catch (error) {

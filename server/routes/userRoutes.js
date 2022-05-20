@@ -43,11 +43,7 @@ router.post ("/register", async (req,res) => {
 
     pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((data) => {
        
-      // const exisitingUser = users.findOne({email})
-
-      // if (exisitingUser) {
-      //   return res.status(409).send("user already exists. Please login")
-      // }
+     
 
       console.log("data", data)
       res.send("Finished")
@@ -57,9 +53,73 @@ router.post ("/register", async (req,res) => {
    // const hashedpassword = bcrypt.hash(password, 10)  
   })
   .catch(err => {
-    res.send(err).status(400)
+    res.status(400).send(err)
   }) 
 });
+
+
+router.post ("/login", (req,res) => {
+  const {email, password } = req.body
+  try {
+    // const correctPassword = await bcrypt.compare(password, user.hashed_password)
+
+     //Checking if user already exists
+    pool.query(`SELECT * FROM users WHERE email= $1;`, [email]).then(data => {
+          const  arr  =  data.rows;
+          console.log(data, password, "arr is", arr)
+        if (arr.length  !=  0) {
+        const correctPassword = arr[0].password
+        
+        if (correctPassword == password) {
+          req.session.user_id = arr[0].id
+          return res.send("Finished")
+        }
+        }
+        res.status(400).send("unable to authenticate")     
+       }
+      )
+       
+      
+  }
+
+  catch(err) {
+    res.status(400).send(err)
+  }
+
+})
+
+//
+router.get("/isLoggedIn", (req,res) => {
+  if(req.session.user_id) {
+    res.status(200).send("true")
+  } else {
+    res.status(200).send("false")
+  }
+
+})
+
+
+
+//     pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((data) => {
+       
+     
+
+//       console.log("data", data)
+//       res.send("Finished")
+  
+//     // res.status(200)
+//     // res.json({message: "success"})
+//    // const hashedpassword = bcrypt.hash(password, 10)  
+//   })
+//   .catch(err => {
+//     res.send(err).status(400)
+//   }) 
+// });
+
+
+
+
+
 
 
 // try {
