@@ -13,13 +13,15 @@ const Home = () => {
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       try {
-        const axiosRes = await axios.get('http://localhost:3002/profiles')
+        const axiosRes = await axios.get(
+          "http://localhost:3002/profiles?searchType=location&lng=0.0&lat=0.0"
+        );
+        axiosRes.data.sort((a, b) => a.distance - b.distance);
         setProfile(axiosRes.data);
       } catch (error) {
-        console.log("error: ",error);
-      } 
-
-    } 
+        console.log("error: ", error);
+      }
+    };
     fetchProfilesResponse();
   }, []);
 
@@ -31,6 +33,14 @@ const Home = () => {
 
 
   const profileDistances = []
+  const userlocation = []
+  profiles.map((profile) => {
+    if (profile.user_id == sessionStorage.getItem('USER_ID')) {
+      userlocation.push(profile.lat)
+      userlocation.push(profile.lng)
+    }
+
+  })
 
   const profilesDisplay = () => profiles.map((profile) => {
 
@@ -41,8 +51,8 @@ const Home = () => {
     
     const profileDistance = () => {
       const R = 6371;
-      const dLat = toRad(parseFloat(profile.lat) - 43.69702911376953);
-      const dLng = toRad(parseFloat(profile.lng) - (-79.65017700195312));
+      const dLat = toRad(parseFloat(profile.lat) - userlocation[0]);
+      const dLng = toRad(parseFloat(profile.lng) - (userlocation[1]));
       const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(toRad(43.69702911376953)) * Math.cos(toRad(profile.lat)) *
       Math.sin(dLng / 2) * Math.sin(dLng / 2);
@@ -57,14 +67,7 @@ const Home = () => {
       <button
         onMouseEnter={() => setIsShown(profile.id)}
         onMouseLeave={() => setIsShown(false)}
-      >
-
-          {/* {
-            if (profile.user_id !== sessionStorage.getItem('USER_ID')) {
-
-            } 
-          } */}
-          
+      >   
         {(isShown != profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
 
           
