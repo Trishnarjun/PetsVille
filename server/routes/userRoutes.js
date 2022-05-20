@@ -2,7 +2,6 @@ const { application } = require('express');
 const express = require('express')
 const router = express.Router()
 const pool = require("../database")
-const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -10,7 +9,9 @@ const jwt = require('jsonwebtoken')
 router.get("/", (req,res) => {
   pool.query("SELECT * FROM users").then((users) => {
     res.json(users.rows)
-  })
+  }).catch(err => {
+    res.send(err).status(400)
+  }) 
 });
 
 //create a user

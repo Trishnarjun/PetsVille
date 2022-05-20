@@ -8,7 +8,7 @@ const users = require("./routes/userRoutes")
 const profiles = require("./routes/profileRoutes")
 const conversations = require("./routes/conversationRoutes")
 const http = require("http")
-const locations = require("./routes/locationRoutes")
+// const locations = require("./routes/locationRoutes")
 const { Server } = require("socket.io") 
 const cookieSession = require("cookie-session")
 
@@ -71,9 +71,6 @@ app.use("/chats", chats)
 
 //conversation routes
 app.use("/conversations",conversations)
-
-//location routes
-app.use("/locations",locations)
 
 //profile route
 app.use("/profiles", profiles)
