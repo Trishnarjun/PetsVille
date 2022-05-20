@@ -4,6 +4,8 @@ const router = express.Router()
 const pool = require("../database")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+import cookie from "../client/src/Hooks/cookie_hook"
+
 
 //get all users
 router.get("/", (req,res) => {
@@ -73,6 +75,7 @@ router.post ("/login", (req,res) => {
         
         if (correctPassword == password) {
           req.session.user_id = arr[0].id
+          cookie(req.session.user_id)
           return res.send("Finished")
         }
         }

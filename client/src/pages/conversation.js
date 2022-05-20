@@ -16,6 +16,8 @@ const Conversation = () => {
      setShowChat(true);
     }
   }
+ 
+console.log(req.session.id)
 
   return (
     <div className='conversation'>
