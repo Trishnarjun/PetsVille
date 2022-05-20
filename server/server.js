@@ -17,6 +17,7 @@ app.use(cors());
 app.use(cookieSession({
   name: 'session',
   keys: ["super secret"],
+  domain: 'http://localhost:3003',
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours));
 }))

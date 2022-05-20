@@ -4,7 +4,8 @@ const router = express.Router()
 const pool = require("../database")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-import cookie from "../client/src/Hooks/cookie_hook"
+
+
 
 
 //get all users
@@ -45,8 +46,6 @@ router.post ("/register", async (req,res) => {
   }
 
     pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((data) => {
-       
-     
 
       console.log("data", data)
       res.send("Finished")
@@ -69,20 +68,21 @@ router.post ("/login", (req,res) => {
      //Checking if user already exists
     pool.query(`SELECT * FROM users WHERE email= $1;`, [email]).then(data => {
           const  arr  =  data.rows;
-          console.log(data, password, "arr is", arr)
+          // token = jwt.sign({ user_id: arr[0].id, users: arr[0].email});
+          // console.log(data, password, "arr is", arr)
         if (arr.length  !=  0) {
         const correctPassword = arr[0].password
         
         if (correctPassword == password) {
-          req.session.user_id = arr[0].id
-          cookie(req.session.user_id)
-          return res.send("Finished")
+          // token = jwt.sign({ user_id: arr[0].id, users: arr[0].email}, "shhhhh");
+          
+          res.status(200).send({user: arr[0].id})
+          return
         }
         }
         res.status(400).send("unable to authenticate")     
-       }
+        }
       )
-       
       
   }
 

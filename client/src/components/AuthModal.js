@@ -49,11 +49,17 @@ const AuthModal = ({ setShowModal, isSignup }) => {
 
     console.log("response", response)
     const success = response.status === 200
- 
+    
+
 
     if (success && isSignup) navigate('/Register')
-    if (success && !isSignup) navigate('/Home')
+    if (success && !isSignup) {
+      sessionStorage.setItem("USER_ID", response.data.user);
+      console.log(response.data.user)
+      navigate('/Home')
+    } 
 
+  
 
     } catch (error) {
       console.log(error)

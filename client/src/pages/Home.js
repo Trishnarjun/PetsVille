@@ -5,7 +5,6 @@ import "../home.css";
 import React, { useEffect, useState }  from 'react';
 
 const Home = () => {
-
   const [profiles, setProfile] = useState([])
   // for filtering by distace //
   //const [distanceIndex, setDistanceIndex] = useState([]) 
@@ -52,21 +51,31 @@ const Home = () => {
       return d; // distance in KM
     };
     profileDistances.push(profileDistance())
-    
+    console.log(sessionStorage.getItem('USER_ID'), profile.user_id)
     return (
       <>
       <button
         onMouseEnter={() => setIsShown(profile.id)}
         onMouseLeave={() => setIsShown(false)}
       >
-        {isShown !== profile.id  && (
+
+          {/* {
+            if (profile.user_id !== sessionStorage.getItem('USER_ID')) {
+
+            } 
+          } */}
+          
+        {(isShown != profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
+
+          
+          
         <div className='profile-box'> 
           <div><img src={profile.picture} alt="owners dog pic" width="200px" /></div>
           <div>{profile.pet_name}</div>
           <div>{Math.round(profileDistance() * 10) / 10} Km</div>
         </div>
         )}
-      {isShown === profile.id  && (
+      {(isShown == profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
         <>
         <div className='profile-box'> 
           <div>Size: {profile.size}</div>
@@ -84,7 +93,7 @@ const Home = () => {
     )
   })
 
-  console.log(profileDistances);
+  // console.log(profileDistances);
   return (
       <>
       <Nav
