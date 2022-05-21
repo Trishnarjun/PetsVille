@@ -19,8 +19,9 @@ const Register = () => {
     event.preventDefault();
     console.log(data);
     console.log("is it changing");
+    const dataToSend = { ...data, user_id: sessionStorage.getItem("USER_ID") };
     axios
-      .post("http://localhost:3002/profiles", data)
+      .post("http://localhost:3002/profiles", dataToSend)
       .then(function (response) {
         console.log(response);
         navigate("/Home");

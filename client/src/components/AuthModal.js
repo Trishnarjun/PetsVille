@@ -32,18 +32,36 @@ const AuthModal = ({ setShowModal, isSignup }) => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('handleSubmit')
+
     try {
       if( isSignup && ( password !== confirmPassword)) {
         setError('Passwords need to match!')
       return
     } 
-    const response =  axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
 
-    const success = response.status === 201
+    // const response = await axios.post('http://localhost:3002/users/register', {email, password, lng, lat})
+    const options = isSignup ? {email, password, lng, lat} : {email, password}
+    const response = await axios.post(`http://localhost:3002/users/${isSignup ? 'register' : 'login'}`, options)
+  
 
-    if (success) navigate('/register')
+    console.log("response", response)
+    const success = response.status === 200
+    
+
+
+    if (success && isSignup) {
+      sessionStorage.setItem("USER_ID", response.data.user);
+      navigate('/Register')
+    } 
+    if (success && !isSignup) {
+      sessionStorage.setItem("USER_ID", response.data.user);
+      navigate('/Home')
+    } 
+
+  
 
     } catch (error) {
       console.log(error)
