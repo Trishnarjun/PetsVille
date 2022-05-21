@@ -32,22 +32,27 @@ const Home = () => {
 
   const profileDistances = []
   const userLocations = []
-  const profilesDisplay = () => profiles.map((profile) => {
-    if (profile.user_id == sessionStorage.getItem('USER_ID')) {
-      userLocations.push(profile.lat)
-      userLocations.push(profile.lng)
+  profiles.map((user) => {
+    if (user.user_id == sessionStorage.getItem('USER_ID')) {
+      userLocations.push(user.lat)
+      userLocations.push(user.lng)
     }
+  })
+
+  const profilesDisplay = () => profiles.map((profile) => {
+    
     const toRad = (d) => {
       return d * Math.PI / 180;
     };
 
+    console.log("the userlocations:",Number(userLocations[0]), Number(userLocations[1]))
     
     const profileDistance = () => {
       const R = 6371;
-      const dLat = toRad(parseFloat(profile.lat) - userLocations[0]);
-      const dLng = toRad(parseFloat(profile.lng) - (userLocations[1]));
+      const dLat = toRad(parseFloat(profile.lat) - Number(userLocations[0]));
+      const dLng = toRad(parseFloat(profile.lng) - (Number(userLocations[1])));
       const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(userLocations[0])) * Math.cos(toRad(profile.lat)) *
+      Math.cos(toRad(Number(userLocations[0]))) * Math.cos(toRad(profile.lat)) *
       Math.sin(dLng / 2) * Math.sin(dLng / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c;
