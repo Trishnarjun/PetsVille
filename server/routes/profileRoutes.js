@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../database");
 
+const searchByLocation = function (lng, lat) {
+  let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  lng::float), 2) + 
+POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
+  const values = [lng, lat];
+  return pool
+    .query(queryString)
+    .then((dbRes) => {
+      console.log("++++++++", dbRes.rows);
+      return dbRes.rows;
+    })
+    .catch((error) => console.error("query error", error.stack));
+};
 //create profile
 router.post("/", (req, res) => {
   const { user_id, pet_name, size, breed, species, age, picture } = req.body;
@@ -22,16 +34,19 @@ router.post("/", (req, res) => {
 
 //get all profiles
 router.get("/", (req, res) => {
-  pool
-    .query(
-      "SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id "
-    )
-    .then((profile) => {
-      res.json(profile.rows);
-    })
-    .catch((err) => {
-      res.send(err).status(400);
+  console.log("_______________IM IN PROFILES_");
+  const searchType = req.query.searchType;
+  const lng = req.query.lng;
+  const lat = req.query.lat;
+  console.log(req.query);
+  if (searchType === "location") {
+    searchByLocation(lng, lat).then((results) => {
+      res.json(results);
     });
+  }
+  if (searchType === "size") {
+    searchBySize();
+  }
 });
 
 //update profiles
