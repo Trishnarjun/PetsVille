@@ -61,12 +61,6 @@ const Home = () => {
         onMouseEnter={() => setIsShown(profile.id)}
         onMouseLeave={() => setIsShown(false)}
       >
-
-          {/* {
-            if (profile.user_id !== sessionStorage.getItem('USER_ID')) {
-
-            } 
-          } */}
           
         {(isShown != profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
 

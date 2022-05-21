@@ -38,10 +38,9 @@ router.post ("/register", async (req,res) => {
       if (arr.length  !=  0) {
         return  res.status(400).json({
           error: "Email already there, No need to register again."
-          
         });
       }
-      res.status(200).send({user: arr[0].id});
+      
   } catch(err) {
   console.log(err)
   }
@@ -49,7 +48,7 @@ router.post ("/register", async (req,res) => {
     pool.query("INSERT INTO users (email, password, lng, lat) VALUES($1, $2, $3, $4)", [email, password, lng, lat]).then((data) => {
 
       console.log("data", data)
-      res.send("Finished")
+      //
   
     // res.status(200)
     // res.json({message: "success"})
@@ -58,6 +57,16 @@ router.post ("/register", async (req,res) => {
   .catch(err => {
     res.status(400).send(err)
   }) 
+
+  try {
+    const  dataNew  =  await pool.query(`SELECT * FROM users WHERE email= $1;`, [email]);
+      const  arrNew  =  dataNew.rows;
+      console.log("after added", arrNew[0].id)
+      res.status(200).send({user: arrNew[0].id});
+      arrNew
+      } catch(err) {
+        console.log(err)
+      }
 });
 
 

@@ -52,10 +52,12 @@ const AuthModal = ({ setShowModal, isSignup }) => {
     
 
 
-    if (success && isSignup) navigate('/Register')
+    if (success && isSignup) {
+      sessionStorage.setItem("USER_ID", response.data.user);
+      navigate('/Register')
+    } 
     if (success && !isSignup) {
       sessionStorage.setItem("USER_ID", response.data.user);
-      console.log(response.data.user)
       navigate('/Home')
     } 
 
