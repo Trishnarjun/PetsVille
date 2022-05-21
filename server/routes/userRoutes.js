@@ -36,11 +36,12 @@ router.post ("/register", async (req,res) => {
     const  data  =  await pool.query(`SELECT * FROM users WHERE email= $1;`, [email]); //Checking if user already exists
       const  arr  =  data.rows;
       if (arr.length  !=  0) {
-      return  res.status(400).json({
-      error: "Email already there, No need to register again."
-      
-      });
+        return  res.status(400).json({
+          error: "Email already there, No need to register again."
+          
+        });
       }
+      res.status(200).send({user: arr[0].id});
   } catch(err) {
   console.log(err)
   }

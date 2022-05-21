@@ -5,7 +5,9 @@ const pool = require("../database")
 //create profile
 router.post("/", (req,res) => {
   const {user_id, pet_name, size, breed, species, age, picture} = req.body
+  console.log(req.body);
   pool.query("INSERT INTO profiles (user_id, pet_name, size, breed, species, age, picture) VALUES($1, $2, $3, $4, $5, $6, $7)", [user_id, pet_name, size, breed, species, age, picture]).then((profile) => {
+    //res.status(200).send({user: user_id})
     res.json(profile.rows);
   }).catch(err => {
     res.send(err).status(400)
