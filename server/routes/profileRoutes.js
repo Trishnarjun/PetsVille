@@ -17,6 +17,8 @@ POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) A
 //create profile
 router.post("/", (req, res) => {
   const { user_id, pet_name, size, breed, species, age, picture } = req.body;
+
+  // function to make get url for uploaded piction maybe api
   console.log(req.body);
   pool
     .query(

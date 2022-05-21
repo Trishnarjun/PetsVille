@@ -68,7 +68,7 @@ router.post("/register", async (req, res) => {
       email,
     ]);
     const arrNew = dataNew.rows;
-    console.log("after added", arrNew[0].id);
+    //console.log("after added", arrNew[0].id)
     res.status(200).send({ user: arrNew[0].id });
     arrNew;
   } catch (err) {

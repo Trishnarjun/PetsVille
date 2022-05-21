@@ -12,7 +12,7 @@ const Register = () => {
     size: "",
     breed: "",
     age: "",
-    image: "",
+    picture: "",
   });
 
   const onSubmit = (event) => {
@@ -95,9 +95,10 @@ const Register = () => {
             <input
               type="file"
               id="uploads"
-              name="image"
+              name="picture"
               accept=".jpg, .jpeg, .png, .gif"
               multiple
+              //onChange={onChange}
             />
           </section>
 

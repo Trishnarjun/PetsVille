@@ -16,7 +16,7 @@ const Home = () => {
         const axiosRes = await axios.get(
           "http://localhost:3002/profiles?searchType=location"
         );
-        axiosRes.data.sort((a, b) => b.distance - b.distance);
+        axiosRes.data.sort((a, b) => a.distance - b.distance);
         setProfile(axiosRes.data);
       } catch (error) {
         console.log("error: ", error);
@@ -31,17 +31,17 @@ const Home = () => {
     navigate(path);
   };
 
-  const profileDistances = [];
+  //const profileDistances = [];
   const userLocations = [];
   const profilesDisplay = () =>
     profiles.map((profile) => {
-      if (profile.user_id === sessionStorage.getItem("USER_ID")) {
-        userLocations.push(profile.lat);
-        userLocations.push(profile.lng);
-      }
-      const toRad = (d) => {
-        return (d * Math.PI) / 180;
-      };
+      // if (profile.user_id === sessionStorage.getItem("USER_ID")) {
+      //   userLocations.push(profile.lat);
+      //   userLocations.push(profile.lng);
+      // }
+      // const toRad = (d) => {
+      //   return (d * Math.PI) / 180;
+      // };
 
       // const profileDistance = () => {
       //   const R = 6371;
@@ -65,8 +65,8 @@ const Home = () => {
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
           >
-            {isShown !== profile.id &&
-              profile.user_id !== sessionStorage.getItem("USER_ID") && (
+            {isShown != profile.id &&
+              profile.user_id != sessionStorage.getItem("USER_ID") && (
                 <div className="profile-box">
                   <div>
                     <img
@@ -79,8 +79,8 @@ const Home = () => {
                   <div>{Math.round(profile.distance * 10) / 10} Km</div>
                 </div>
               )}
-            {isShown === profile.id &&
-              profile.user_id !== sessionStorage.getItem("USER_ID") && (
+            {isShown == profile.id &&
+              profile.user_id != sessionStorage.getItem("USER_ID") && (
                 <>
                   <div className="profile-box">
                     <div>Size: {profile.size}</div>
