@@ -5,7 +5,6 @@ import "../home.css";
 import React, { useEffect, useState }  from 'react';
 
 const Home = () => {
-
   const [profiles, setProfile] = useState([])
   // for filtering by distace //
   //const [distanceIndex, setDistanceIndex] = useState([]) 
@@ -32,9 +31,12 @@ const Home = () => {
 
 
   const profileDistances = []
-
+  const userLocations = []
   const profilesDisplay = () => profiles.map((profile) => {
-
+    if (profile.user_id == sessionStorage.getItem('USER_ID')) {
+      userLocations.push(profile.lat)
+      userLocations.push(profile.lng)
+    }
     const toRad = (d) => {
       return d * Math.PI / 180;
     };
@@ -42,31 +44,41 @@ const Home = () => {
     
     const profileDistance = () => {
       const R = 6371;
-      const dLat = toRad(parseFloat(profile.lat) - 43.69702911376953);
-      const dLng = toRad(parseFloat(profile.lng) - (-79.65017700195312));
+      const dLat = toRad(parseFloat(profile.lat) - userLocations[0]);
+      const dLng = toRad(parseFloat(profile.lng) - (userLocations[1]));
       const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(43.69702911376953)) * Math.cos(toRad(profile.lat)) *
+      Math.cos(toRad(userLocations[0])) * Math.cos(toRad(profile.lat)) *
       Math.sin(dLng / 2) * Math.sin(dLng / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c;
       return d; // distance in KM
     };
     profileDistances.push(profileDistance())
-    
+    console.log(sessionStorage.getItem('USER_ID'), profile.user_id)
     return (
       <>
       <button
         onMouseEnter={() => setIsShown(profile.id)}
         onMouseLeave={() => setIsShown(false)}
       >
-        {isShown !== profile.id  && (
+
+          {/* {
+            if (profile.user_id !== sessionStorage.getItem('USER_ID')) {
+
+            } 
+          } */}
+          
+        {(isShown != profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
+
+          
+          
         <div className='profile-box'> 
           <div><img src={profile.picture} alt="owners dog pic" width="200px" /></div>
           <div>{profile.pet_name}</div>
           <div>{Math.round(profileDistance() * 10) / 10} Km</div>
         </div>
         )}
-      {isShown === profile.id  && (
+      {(isShown == profile.id && profile.user_id != sessionStorage.getItem('USER_ID'))  && (
         <>
         <div className='profile-box'> 
           <div>Size: {profile.size}</div>
@@ -84,7 +96,7 @@ const Home = () => {
     )
   })
 
-  console.log(profileDistances);
+  // console.log(profileDistances);
   return (
       <>
       <Nav
