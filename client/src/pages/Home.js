@@ -10,6 +10,7 @@ const Home = () => {
   //const [distanceIndex, setDistanceIndex] = useState([])
   const [isShown, setIsShown] = useState(false);
 
+  
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       try {
@@ -31,14 +32,16 @@ const Home = () => {
     navigate(path);
   };
 
-  //const profileDistances = [];
-  const userLocations = [];
-  const profilesDisplay = () =>
+  const names =[];
+  profiles.map(profile => {
+    if (profile.user_id == sessionStorage.getItem("USER_ID")) {
+      names.push(profile.pet_name)
+    }
+  })
+
+
+  const profilesDisplay = () => 
     profiles.map((profile) => {
-      // if (profile.user_id === sessionStorage.getItem("USER_ID")) {
-      //   userLocations.push(profile.lat);
-      //   userLocations.push(profile.lng);
-      // }
       // const toRad = (d) => {
       //   return (d * Math.PI) / 180;
       // };
@@ -97,10 +100,12 @@ const Home = () => {
       );
     });
 
+    
   // console.log(profileDistances);
+  console.log(names[0])
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} />
+      <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
       <body>
         <div className="profiles">{profilesDisplay()}</div>
       </body>

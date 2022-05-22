@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
 
   // function to make get url for uploaded piction maybe api
 
-  
+
   console.log(req.body);
   pool
     .query(
@@ -54,11 +54,12 @@ router.get("/", (req, res) => {
 });
 
 //update profiles
-router.post("/:id", (req, res) => {
-  const { user_id, pet_name, size, breed, species, age, picture } = req.body;
+router.post("/update", (req, res) => {
+  const {user_id, pet_name, size, breed, species, age, picture} = req.body;
+  console.log(req.body)
   pool
     .query(
-      "UPDATE profiles pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
+      "UPDATE profiles SET pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
       [pet_name, size, breed, species, age, picture, user_id]
     )
     .then((chats) => {})
