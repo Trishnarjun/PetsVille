@@ -6,7 +6,43 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
 
   const navigate = useNavigate();
-  const [profiles, setProfile] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [edit, setEdit] = useState(false)
+  // const [user, setUser] = useState()
+
+  useEffect(() => {
+    const fetchProfilesResponse = async () => {
+      try {
+        const axiosRes = await axios.get(
+          "http://localhost:3002/profiles?searchType=location"
+        );
+        axiosRes.data.sort((a, b) => a.distance - b.distance);
+        setProfiles(axiosRes.data);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    };
+    fetchProfilesResponse();
+  }, []);
+
+  const userObj = [];
+  profiles.forEach(user => {
+    //console.log(user)
+    if (user.user_id == sessionStorage.getItem("USER_ID")) {
+      console.log("entered:",user)
+      userObj.push(user.picture)
+      userObj.push(user.pet_name)
+      userObj.push(user.species)
+      userObj.push(user.size)
+      userObj.push(user.breed)
+      userObj.push(user.age)
+
+      console.log(user.pet_name)
+    }
+  })
+  console.log("mapeed:",userObj[0])
+  // console.log("mapeed not working:",userObj[0]['pet_name'])
+
   const [data, setData] = useState({
     pet_name: "",
     species: "",
@@ -29,6 +65,7 @@ const Profile = () => {
     await navigate("/Home");
   };
 
+
   const onChange = (event) => {
     console.log(`this is event`, event);
     
@@ -36,6 +73,16 @@ const Profile = () => {
       return { ...current, [event.target.name]: event.target.value };
     });
   };
+
+  const onEdit =(e) => {
+    e.preventDefault();
+    console.log("working")
+    if (edit) {
+      setEdit(false)
+    } else {
+      setEdit(true)
+    }
+  }
 
   const uploadimage = (files) => {
     const formdata = new FormData();
@@ -53,48 +100,53 @@ const Profile = () => {
   }
 
 
-  useEffect(() => {
-    const fetchProfilesResponse = async () => {
-      try {
-        const axiosRes = await axios.get(
-          "http://localhost:3002/profiles?searchType=location"
-        );
-        axiosRes.data.sort((a, b) => a.distance - b.distance);
-        setProfile(axiosRes.data);
-      } catch (error) {
-        console.log("error: ", error);
-      }
-    };
-    fetchProfilesResponse();
-  }, []);
 
-  const dataPreset =[];
-  profiles.map(profile => {
-    if (profile.user_id == sessionStorage.getItem("USER_ID")) {
-      dataPreset.push(profile.pet_name)
-      dataPreset.push(profile.species)
-      dataPreset.push(profile.size)
-      dataPreset.push(profile.breed)
-      dataPreset.push(profile.age)
-    }
-  })
+  
+
+  console.log(data)
+
+  
+
+  
 
   return (
     <>
       {/* onSubmit={onSubmit} */}
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
       <div className="sign-up-form">
-        <form className="form-box" onSubmit={onSubmit}> 
+        <form className="form-box" onSubmit={onSubmit} > 
           <section>
-            <h3 className="header"> Edit Profile</h3>
-            <input
+            <h3 className="header">{edit ? "Edit Profile" : "Profile"}</h3>
+
+            {!edit && (
+              <>
+              <div>
+                <img
+                  src={userObj[0]}
+                  alt="owners dog pic"
+                  width="100px"
+                  height="100px"
+                />
+              </div>
+              <div>Name: {userObj[1]} </div>
+              <div>Species: {userObj[2]} </div>
+              <div>Size: {userObj[3]} </div>
+              <div>Breed: {userObj[4]} </div>
+              <div>Size: {userObj[5]} </div>
+              <button type="button" className="btn btn-outline-info" onClick={onEdit}>Edit</button>
+              </>
+            )}
+
+
+            {edit && (
+            <><input
               id="name"
               type="text"
               name="pet_name"
               placeholder="name"
               required={true}
               onChange={onChange}
-              value={dataPreset[0]}
+              value={data.pet_name}
             />
             <br />
             <input
@@ -103,8 +155,7 @@ const Profile = () => {
               placeholder="species"
               required={true}
               onChange={onChange}
-              value={dataPreset[1]}
-
+              value={data.species}
             />
             <br />
             <input
@@ -113,8 +164,7 @@ const Profile = () => {
               placeholder="size"
               required={true}
               onChange={onChange}
-              value={dataPreset[2]}
-              
+              value={data.size}
             />
             <br />
             <input
@@ -123,7 +173,7 @@ const Profile = () => {
               placeholder="breed"
               required={true}
               onChange={onChange}
-              value={dataPreset[3]}
+              value={data.breed}
               
             />
             <br />
@@ -134,7 +184,8 @@ const Profile = () => {
               placeholder="age"
               required={true}
               onChange={onChange}
-              value={dataPreset[4]}
+              value={data.age}
+              
             />
             <br />
             <label for="uploads">Choose an image you want to upload:</label>
@@ -143,9 +194,13 @@ const Profile = () => {
               name="picture"
               onChange={event => uploadimage(event.target.files)}
             />
+            <button className="sign-up-form-button" onSubmit={onSubmit}>Update</button>
+            <button type="button" className="btn btn-outline-info" onClick={onEdit}>Cancel</button>
+            </>)}
           </section>
 
-          <button className="sign-up-form-button">Update</button>
+          
+          
         </form>
       </div>
     </>
