@@ -29,13 +29,34 @@ const Register = () => {
       .catch(function (error) {
         console.log(error);
       });
+    uploadimage()
   };
   const onChange = (event) => {
     console.log(`this is event`, event);
+    
+    
+    
     setData((current) => {
       return { ...current, [event.target.name]: event.target.value };
     });
   };
+
+  const uploadimage = (files) => {
+    const formdata = new FormData();
+    console.log(files[0])
+    formdata.append("file", files[0])
+    formdata.append("upload_preset", "vjuxaevv")
+    axios
+      .post("https://api.cloudinary.com/v1_1/petsville-1/image/upload", formdata).then((response) => {
+        
+      console.log(response.data.url)
+      setData((prev) => {
+        return {...prev, picture: response.data.url}
+      })
+    
+    })
+
+  }
 
   return (
     <>
@@ -94,11 +115,8 @@ const Register = () => {
             <label for="uploads">Choose the images you want to upload:</label>
             <input
               type="file"
-              id="uploads"
               name="picture"
-              accept=".jpg, .jpeg, .png, .gif"
-              multiple
-              //onChange={onChange}
+              onChange={event => uploadimage(event.target.files)}
             />
           </section>
 
