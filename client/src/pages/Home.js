@@ -64,15 +64,15 @@ const Home = () => {
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
       return (
         <>
+          {profile.user_id != sessionStorage.getItem("USER_ID") && (
           <button
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
           >
-            {isShown != profile.id &&
-              profile.user_id != sessionStorage.getItem("USER_ID") && (
+            {isShown != profile.id && (
                 <div className="profile-box">
                   <div>
-                    <img
+                    <imgw
                       src={profile.picture}
                       alt="owners dog pic"
                       width="200px"
@@ -82,8 +82,7 @@ const Home = () => {
                   <div>{Math.round(profile.distance * 10) / 10} Km</div>
                 </div>
               )}
-            {isShown == profile.id &&
-              profile.user_id != sessionStorage.getItem("USER_ID") && (
+            {isShown == profile.id && (
                 <>
                   <div className="profile-box">
                     <div>Size: {profile.size}</div>
@@ -95,7 +94,8 @@ const Home = () => {
                   <div></div>
                 </>
               )}
-          </button>
+          </button>)
+          }
         </>
       );
     });
