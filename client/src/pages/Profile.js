@@ -82,6 +82,14 @@ const Profile = () => {
     } else {
       setEdit(true)
     }
+    setData({
+      pet_name: userObj[1],
+      species: userObj[2],
+      size: userObj[3],
+      breed: userObj[4],
+      age: userObj[5],
+      picture: userObj[0],
+    })
   }
 
   const uploadimage = (files) => {

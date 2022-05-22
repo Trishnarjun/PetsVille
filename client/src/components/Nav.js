@@ -18,6 +18,11 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
     document.getElementsByClassName("header").length === 0  ? navigate("/Profile") : navigate("/Home")
   }
 
+  const signOut = () => {
+    sessionStorage.clear();
+    navigate("/")
+  }
+
   
   
 
@@ -69,7 +74,14 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
         disabled={showModal}
         ><img src={names[1]} alt="pet pic" width="50" height="20"/>{document.getElementsByClassName("header").length === 0 ? names[0] : "Home"} </button>
         }
-    
+
+      {sessionStorage.getItem("USER_ID") &&<button
+        className="nav-button-profile"
+        onClick={ signOut }
+        disabled={showModal}
+        >Sign out</button>
+        }
+
     </nav>
   )
 }
