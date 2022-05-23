@@ -64,6 +64,7 @@ const Home = () => {
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
       return (
         <>
+          {profile.user_id != sessionStorage.getItem("USER_ID") && (
           <button
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
@@ -95,7 +96,8 @@ const Home = () => {
                   <div></div>
                 </>
               )}
-          </button>
+          </button>)
+          }
         </>
       );
     });
