@@ -12,7 +12,17 @@ const Home = () => {
   const [mainOption, setMainOption] = useState("location");
   const [mainSpecies, setMainSpecies] = useState("Dog");
   const [mainAge, setMainAge] = useState("1");
+  const [users, setUsers] = useState([])
 
+  // const userLocations = [];
+
+  // users.map(user => {
+  //   if (user.user_id == sessionStorage.getItem("USER_ID")) {
+  //     userLocations.push(user.lat)
+  //     userLocations.push(user.lng)
+  //   }
+  // })
+  
   
   useEffect(() => {
     const fetchProfilesResponse = async () => {
@@ -34,9 +44,19 @@ const Home = () => {
       } catch (error) {
         console.log("error: ", error);
       }
+      try {
+        const axiosRes = await axios.get(
+          "http://localhost:3002/users"
+        );
+        setUsers(axiosRes.data);
+      } catch (error) {
+        console.log("error: ", error);
+      }
     };
     fetchProfilesResponse();
   }, [mainOption, mainSpecies, mainAge]);
+
+  let user = users.find((user) => user.user_id == sessionStorage.getItem("USER_ID"))
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -45,6 +65,9 @@ const Home = () => {
   };
 
   const names =[];
+  
+
+
   profiles.map(profile => {
     if (profile.user_id == sessionStorage.getItem("USER_ID")) {
       names.push(profile.pet_name)
@@ -72,7 +95,7 @@ const Home = () => {
       //   var d = R * c;
       //   return d; // distance in KM
       // };
-      // profileDistances.push(profileDistance());
+      //profileDistances.push(profileDistance());
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
 
       if (profile.user_id != sessionStorage.getItem("USER_ID")) {
@@ -96,7 +119,7 @@ const Home = () => {
                   </div>
 
                   <div>{profile.pet_name}</div>
-                  <div>{Math.round(profile.distance * 10) / 10} Km</div>
+                  <div>{(Math.round((profile.distance) * 10) / 10)} Km</div>
                 </div>
               )}
             {isShown == profile.id &&

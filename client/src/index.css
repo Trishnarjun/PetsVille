@@ -63,8 +63,13 @@ html, body {
 nav {
   width: 100%;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   
+}
+
+.allNav {
+  display: flex;
+  gap: 16px;
 }
 
  nav .nav-button {

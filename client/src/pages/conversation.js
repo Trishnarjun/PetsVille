@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "../conversations.css";
 import axios from "axios";
+import Nav from "../components/Nav";
+
 
 const socket = io.connect("http://localhost:3002");
 
@@ -39,6 +41,13 @@ const Conversation = () => {
     }
   });
 
+  const names =[];
+  profiles.map(profile => {
+    if (profile.user_id == sessionStorage.getItem("USER_ID")) {
+      names.push(profile.pet_name)
+    }
+  })
+
   console.log(profiles);
 
   const joinRoom = () => {
@@ -51,6 +60,8 @@ const Conversation = () => {
   console.log(usernames);
 
   return (
+    <>
+    <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
     <div className="conversation">
       {!showChat ? (
         <div className="joinChatContainer">
@@ -75,6 +86,7 @@ const Conversation = () => {
         <Chat socket={socket} username={usernames[0]} room={room} />
       )}
     </div>
+    </>
   );
 };
 export default Conversation;

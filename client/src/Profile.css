@@ -3,7 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 300px;
-  height: 400px;
+  height: 430px;
   background-color: #A9D5D6;
   border-radius: 10px;
   padding: 40px;
@@ -57,7 +57,7 @@
 
 
 .update-button, .cancel-button  {
-  padding: 1.3em 3em;
+  padding: 1.1em 1.7em;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -70,6 +70,22 @@
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
+  
+}
+
+.searchType {
+  border: none;
+  padding: 5px;
+  border-radius: 5pc;
+}
+
+.buttons {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  align-content: space-between;
+  
 }
 
 .update-button:hover{

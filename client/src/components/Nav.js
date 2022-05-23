@@ -61,6 +61,8 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
         <img className="logo" src={logo} alt="PetsVille logo"/>
       </div>
 
+      <div className= "allNav">
+
       
       {!authToken && !minimal &&<button
         className="nav-button"
@@ -82,6 +84,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
         disabled={showModal}
         >Sign out</button>
         }
+        </div>
 
     </nav>
   )

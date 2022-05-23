@@ -3,11 +3,17 @@ const router = express.Router();
 const pool = require("../database");
 
 const searchByLocation = function (lng, lat) {
-  let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  lng::float), 2) + 
-POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
-  const values = [lng, lat];
+  
+  // wee need to add distance to databse schema
+  // adding th actiall convertiong function
+  //get the user id and match it to the profile.lng and profile.lat
+  //profiles.lng and 
+  
+  let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  $2::float), 2) + 
+POW(69.1 * ($1::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
+const values = [lng, lat];
   return pool
-    .query(queryString)
+    .query(queryString, values)
     .then((dbRes) => {
       return dbRes.rows;
     })
@@ -71,10 +77,12 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   const { searchType, lng, lat, species, age } = req.query;
 
-  console.log(req.query);
+  console.log("this is the query:", req.query);
   if (searchType === "location") {
     searchByLocation(lng, lat).then((results) => {
       res.json(results);
+    }).catch((err) => {
+      res.send(err).status(400);
     });
   }
   if (searchType === "species") {

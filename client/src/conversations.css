@@ -1,7 +1,7 @@
 .conversation {
   width: 100vw;
   height: 100vh;
-  background: #fff;
+  background: 0bf0d1;
   color: #212121;
   font-family: "Open Sans", sans-serif;
   display: grid;
@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-bottom: 23rem;
 }
 
 .joinChatContainer h3 {

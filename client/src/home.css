@@ -32,8 +32,9 @@ body {
   border-radius: 30px;
   background-color: #008080;
   background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
-  transition: all 0.3s ease 0s;
+  transition: all .3s ease;
   cursor: pointer;
+  text-transform: capitalize;
   
 }
 
@@ -41,11 +42,12 @@ body {
 .profile-box:hover {
   box-shadow: 7px 7px #888888;
   transition: 0.3s;
-  transform: translateY(-7px);
+  transform: translateY(-5px);
   
 }
 .profile-box:active {
   transform: translateY(-1px);
+  transition: all 0.3s ease .5s;
 }
 
 
@@ -74,29 +76,36 @@ body {
 }
 
 .nav-button-profile{
-  height: 5.5rem;
-    margin-top: 45px;
-    border: none;
-    padding-left: -20px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 1.5px;
-    background-color: transparent;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    align-items: center;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
+  height: 5.0rem;
+  width: 5rem;
+  margin-top: 45px;
+  border: none;
+  padding-left: -20px;
+  padding-bottom: 5px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 1.5px;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  align-items: center;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-top: 2rem;
+  margin-left: 45rem;
+  border-radius: 45%;
 }
 
 .nav-button-profile:hover {
-  box-shadow: 7px 7px 7px 7px#888888;
+
   transition: 0.3s;
+  /* color: #fff; */
   transform: translateY(-7px);
 }
 
@@ -148,10 +157,10 @@ img {
   border-radius: 1rem;
   border: 0;
   font-size: 1.5rem;
-  font-family:sans-serif;
+  font-family: comfortaa;
   height: 2.2rem;
   line-height: 1.2rem;
-  margin-top: 45px;
+  margin-top: 3.5rem;
   margin-right: 1rem;
   width: 8rem;
   border-width: 2px;
