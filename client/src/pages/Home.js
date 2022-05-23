@@ -12,22 +12,22 @@ const Home = () => {
   const [mainOption, setMainOption] = useState("location");
   const [mainSpecies, setMainSpecies] = useState("Dog");
   const [mainAge, setMainAge] = useState("1");
-  const [users, setUsers] = useState([])
-
-  // const userLocations = [];
-
-  // users.map(user => {
-  //   if (user.user_id == sessionStorage.getItem("USER_ID")) {
-  //     userLocations.push(user.lat)
-  //     userLocations.push(user.lng)
-  //   }
-  // })
-  
-  
+  const [lng, setlng] = useState(null);
+  const [lat, setlat] = useState(null);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setlat(position.coords.latitude);
+      setlng(position.coords.longitude);
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }, []);
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       console.log({ mainOption });
       let url = `http://localhost:3002/profiles?searchType=${mainOption}`;
+      url += `&lng=${lng}`;
+      url += `&lat=${lat}`;
       if (mainOption === "species") {
         url += `&species=${mainSpecies}`;
       }
@@ -35,28 +35,16 @@ const Home = () => {
         url += `&age=${mainAge}`;
       }
       try {
-        const axiosRes = await axios.get(
-          url
-          //"http://localhost:3002/profiles?searchType=species"
-        );
+        const axiosRes = await axios.get(url);
         axiosRes.data.sort((a, b) => a.distance - b.distance);
         setProfile(axiosRes.data);
       } catch (error) {
         console.log("error: ", error);
       }
-      try {
-        const axiosRes = await axios.get(
-          "http://localhost:3002/users"
-        );
-        setUsers(axiosRes.data);
-      } catch (error) {
-        console.log("error: ", error);
-      }
     };
     fetchProfilesResponse();
-  }, [mainOption, mainSpecies, mainAge]);
+  }, [mainOption, mainSpecies, mainAge, lng, lat]);
 
-  let user = users.find((user) => user.user_id == sessionStorage.getItem("USER_ID"))
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -64,18 +52,14 @@ const Home = () => {
     navigate(path);
   };
 
-  const names =[];
-  
-
-
-  profiles.map(profile => {
+  const names = [];
+  profiles.map((profile) => {
     if (profile.user_id == sessionStorage.getItem("USER_ID")) {
-      names.push(profile.pet_name)
+      names.push(profile.pet_name);
     }
-  })
+  });
 
-
-  const profilesDisplay = () => 
+  const profilesDisplay = () =>
     profiles.map((profile) => {
       // const toRad = (d) => {
       //   return (d * Math.PI) / 180;
@@ -100,8 +84,7 @@ const Home = () => {
 
       if (profile.user_id != sessionStorage.getItem("USER_ID")) {
         //if (true) {
-      return (
-          
+        return (
           <div
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
@@ -124,25 +107,31 @@ const Home = () => {
               )}
             {isShown == profile.id &&
               profile.user_id != sessionStorage.getItem("USER_ID") && (
-                  <div className="profile-box">
-                    <div>Size: {profile.size}</div>
-                    <div>Breed: {profile.breed}</div>
-                    <div>Kind: {profile.species}</div>
-                    <div>Age: {profile.age}</div>
-                    <button className="chat-button" onClick={routeChange}>Chat</button>
-                  </div>
+                <div className="profile-box">
+                  <div>Size: {profile.size}</div>
+                  <div>Breed: {profile.breed}</div>
+                  <div>Kind: {profile.species}</div>
+                  <div>Age: {profile.age}</div>
+                  <button className="chat-button" onClick={routeChange}>
+                    Chat
+                  </button>
+                </div>
               )}
           </div>
-        
-      );}
+        );
+      }
     });
 
-    
   // console.log(profileDistances);
-  console.log(names[0])
+  console.log(names[0]);
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
+      <Nav
+        minimal={true}
+        setShowModal={() => {}}
+        showModal={false}
+        name={names[0]}
+      />
       <body>
         <div className="search">
           <form className="search-form" action="/Home" method="GET"></form>
@@ -190,9 +179,7 @@ const Home = () => {
             </select>
           )}
         </div>
-        <div className="profiles">
-          {profilesDisplay()}
-        </div>
+        <div className="profiles">{profilesDisplay()}</div>
       </body>
     </>
   );

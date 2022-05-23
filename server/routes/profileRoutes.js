@@ -19,15 +19,15 @@ const values = [lng, lat];
     })
     .catch((error) => console.error("query error", error.stack));
 };
-const searchBySpecies = function (species) {
+const searchBySpecies = function (species, lng, lat) {
   let queryString = ` 
-    SELECT profiles.*, SQRT(POW(69.1 * (users.lat::float -  lng::float), 2) + 
-      POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance 
+    SELECT profiles.*, SQRT(POW(69.1 * (users.lat::float -  $3::float), 2) + 
+      POW(69.1 * ($2::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance 
     FROM profiles 
     INNER JOIN users ON profiles.user_id = users.id 
     WHERE species = $1 
     ORDER BY distance `;
-  const values = [species];
+  const values = [species, lng, lat];
   return pool
     .query(queryString, values)
     .then((dbRes) => {
@@ -35,15 +35,15 @@ const searchBySpecies = function (species) {
     })
     .catch((error) => console.error("query error", error.stack));
 };
-const searchByAge = function (age) {
+const searchByAge = function (age, lng, lat) {
   let queryString = ` 
-    SELECT profiles.*, SQRT(POW(69.1 * (users.lat::float -  lng::float), 2) + 
-      POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance 
+    SELECT profiles.*, SQRT(POW(69.1 * (users.lat::float -  $3::float), 2) + 
+      POW(69.1 * ($2::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance 
     FROM profiles 
     INNER JOIN users ON profiles.user_id = users.id 
     WHERE age = $1 
     ORDER BY distance `;
-  const values = [age];
+  const values = [age, lng, lat];
   return pool
     .query(queryString, values)
     .then((dbRes) => {
@@ -86,12 +86,12 @@ router.get("/", (req, res) => {
     });
   }
   if (searchType === "species") {
-    searchBySpecies(species).then((results) => {
+    searchBySpecies(species, lng, lat).then((results) => {
       res.json(results);
     });
   }
   if (searchType === "age") {
-    searchByAge(age).then((results) => {
+    searchByAge(age, lng, lat).then((results) => {
       res.json(results);
     });
   }
