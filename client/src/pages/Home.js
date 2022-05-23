@@ -9,13 +9,25 @@ const Home = () => {
   // for filtering by distace //
   //const [distanceIndex, setDistanceIndex] = useState([])
   const [isShown, setIsShown] = useState(false);
+  const [mainOption, setMainOption] = useState("location");
+  const [mainSpecies, setMainSpecies] = useState("Dog");
+  const [mainAge, setMainAge] = useState("1");
 
   
   useEffect(() => {
     const fetchProfilesResponse = async () => {
+      console.log({ mainOption });
+      let url = `http://localhost:3002/profiles?searchType=${mainOption}`;
+      if (mainOption === "species") {
+        url += `&species=${mainSpecies}`;
+      }
+      if (mainOption === "age") {
+        url += `&age=${mainAge}`;
+      }
       try {
         const axiosRes = await axios.get(
-          "http://localhost:3002/profiles?searchType=location"
+          url
+          //"http://localhost:3002/profiles?searchType=species"
         );
         axiosRes.data.sort((a, b) => a.distance - b.distance);
         setProfile(axiosRes.data);
@@ -24,7 +36,7 @@ const Home = () => {
       }
     };
     fetchProfilesResponse();
-  }, []);
+  }, [mainOption, mainSpecies, mainAge]);
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -109,9 +121,60 @@ const Home = () => {
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
       <body>
-        <div className="profiles">{profilesDisplay()}</div>
+        <div className="search">
+          <form className="search-form" action="/Home" method="GET"></form>
+          <label for="searchType">Search By:</label>
+          <select
+            className="searchType"
+            id="searchType"
+            onChange={(e) => setMainOption(e.target.value)}
+          >
+            <option value="location">By Location</option>
+            <option value="species">By Species</option>
+            <option value="age">By Age</option>
+          </select>
+          {mainOption === "species" && (
+            <select
+              className="searchType"
+              id="searchSpeciesType"
+              onChange={(e) => setMainSpecies(e.target.value)}
+            >
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+            </select>
+          )}
+          {mainOption === "age" && (
+            <select
+              className="searchType"
+              id="searchAgeType"
+              onChange={(e) => setMainAge(e.target.value)}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+            </select>
+          )}
+        </div>
+        <div className="profiles">
+          {profilesDisplay()}
+          <div />
+        </div>
       </body>
     </>
   );
 };
 export default Home;
+
+//password: $2a$10$xO3hu6O3E8YorPzQqKyMyuSZoAyG9VQKfO4GePL//eZMhv9lNAl8K
