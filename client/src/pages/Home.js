@@ -69,10 +69,11 @@ const Home = () => {
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
           >
-            {isShown != profile.id && (
+            {isShown != profile.id &&
+              profile.user_id != sessionStorage.getItem("USER_ID") && (
                 <div className="profile-box">
                   <div>
-                    <imgw
+                    <img
                       src={profile.picture}
                       alt="owners dog pic"
                       width="200px"
@@ -82,7 +83,8 @@ const Home = () => {
                   <div>{Math.round(profile.distance * 10) / 10} Km</div>
                 </div>
               )}
-            {isShown == profile.id && (
+            {isShown == profile.id &&
+              profile.user_id != sessionStorage.getItem("USER_ID") && (
                 <>
                   <div className="profile-box">
                     <div>Size: {profile.size}</div>
