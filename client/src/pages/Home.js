@@ -13,7 +13,6 @@ const Home = () => {
   const [mainSpecies, setMainSpecies] = useState("Dog");
   const [mainAge, setMainAge] = useState("1");
 
-  
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       console.log({ mainOption });
@@ -44,15 +43,14 @@ const Home = () => {
     navigate(path);
   };
 
-  const names =[];
-  profiles.map(profile => {
+  const names = [];
+  profiles.map((profile) => {
     if (profile.user_id == sessionStorage.getItem("USER_ID")) {
-      names.push(profile.pet_name)
+      names.push(profile.pet_name);
     }
-  })
+  });
 
-
-  const profilesDisplay = () => 
+  const profilesDisplay = () =>
     profiles.map((profile) => {
       // const toRad = (d) => {
       //   return (d * Math.PI) / 180;
@@ -77,49 +75,53 @@ const Home = () => {
       return (
         <>
           {profile.user_id != sessionStorage.getItem("USER_ID") && (
-          <button
-            onMouseEnter={() => setIsShown(profile.id)}
-            onMouseLeave={() => setIsShown(false)}
-          >
-            {isShown != profile.id &&
-              profile.user_id != sessionStorage.getItem("USER_ID") && (
-                <div className="profile-box">
-                  <div>
-                    <img
-                      src={profile.picture}
-                      alt="owners dog pic"
-                      width="200px"
-                    />
-                  </div>
-                  <div>{profile.pet_name}</div>
-                  <div>{Math.round(profile.distance * 10) / 10} Km</div>
-                </div>
-              )}
-            {isShown == profile.id &&
-              profile.user_id != sessionStorage.getItem("USER_ID") && (
-                <>
+            <div
+              onMouseEnter={() => setIsShown(profile.id)}
+              onMouseLeave={() => setIsShown(false)}
+            >
+              {isShown != profile.id &&
+                profile.user_id != sessionStorage.getItem("USER_ID") && (
                   <div className="profile-box">
-                    <div>Size: {profile.size}</div>
-                    <div>Breed: {profile.breed}</div>
-                    <div>Kind: {profile.species}</div>
-                    <div>Age: {profile.age}</div>
-                    <button onClick={routeChange}>Chat</button>
+                    <div>
+                      <img
+                        src={profile.picture}
+                        alt="owners dog pic"
+                        width="200px"
+                        height="200px"
+                      />
+                    </div>
+                    <div>{profile.pet_name}</div>
+                    <div>{Math.round(profile.distance * 10) / 10} Km</div>
                   </div>
-                  <div></div>
-                </>
-              )}
-          </button>)
-          }
+                )}
+              {isShown == profile.id &&
+                profile.user_id != sessionStorage.getItem("USER_ID") && (
+                  <>
+                    <div className="profile-box">
+                      <div>Size: {profile.size}</div>
+                      <div>Breed: {profile.breed}</div>
+                      <div>Kind: {profile.species}</div>
+                      <div>Age: {profile.age}</div>
+                      <button onClick={routeChange}>Chat</button>
+                    </div>
+                  </>
+                )}
+            </div>
+          )}
         </>
       );
     });
 
-    
   // console.log(profileDistances);
-  console.log(names[0])
+  console.log(names[0]);
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
+      <Nav
+        minimal={true}
+        setShowModal={() => {}}
+        showModal={false}
+        name={names[0]}
+      />
       <body>
         <div className="search">
           <form className="search-form" action="/Home" method="GET"></form>
@@ -167,10 +169,7 @@ const Home = () => {
             </select>
           )}
         </div>
-        <div className="profiles">
-          {profilesDisplay()}
-          <div />
-        </div>
+        <div className="profiles">{profilesDisplay()}</div>
       </body>
     </>
   );
