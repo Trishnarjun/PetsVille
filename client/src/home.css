@@ -1,3 +1,5 @@
+
+
 body {
   background-image: url("https://t3.ftcdn.net/jpg/02/98/20/18/360_F_298201821_e90YxH0f6FBwOvcKhynlwF8sNYxlCMsg.webp");
 }
@@ -16,16 +18,45 @@ body {
 .profile-box {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   margin: 1rem;
-  background-color: white;
+  /* background-color: rgb(246 154 100); */
   width: 10rem;
   padding: 3em;
   justify-content: center;
   align-items: center;
   height: 25rem;
   border: 0px;
-
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 30px;
+  background-color: #008080;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
   
+}
+
+
+.profile-box:hover {
+  box-shadow: 7px 7px #888888;
+  transition: 0.3s;
+  transform: translateY(-7px);
+  
+}
+.profile-box:active {
+  transform: translateY(-1px);
+}
+
+
+.search {
+  display: flex;
+    align-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 10px;
 }
 
 
@@ -38,29 +69,80 @@ body {
   .profiles {
     flex-direction: column;
     margin: 0%;
-    margin: 0% 20% 0%;
+    margin: 0% 0% 0%;
   }
 }
 
 .nav-button-profile{
   height: 5.5rem;
-  margin-top: 45px;
-  border: none;
-  padding-left: 20px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 1.5px;
-  background-color: transparent;
+    margin-top: 45px;
+    border: none;
+    padding-left: -20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 1.5px;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
 }
 
+.nav-button-profile:hover {
+  box-shadow: 7px 7px 7px 7px#888888;
+  transition: 0.3s;
+  transform: translateY(-7px);
+}
 
+.nav-button-profile:active {
+  transform: translateY(-1px);
+}
+
+.home {
+  padding: 10px;
+}
+
+.chat-button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.chat-button:hover {
+  background-color: #0bf0d1;
+  box-shadow: 0px 15px 20px rgba(0, 255, 255, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.chat-button:active {
+  transform: translateY(-1px);
+}
 img {
   border-radius: 50%;
   object-fit: cover;
 }
 
+.logo {
+  border-radius: 0%;
+  object-fit: none;
+}
 
 .nav-button-signout {
   border-radius: 1rem;

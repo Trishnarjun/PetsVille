@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Profile.css"; 
 
 const Profile = () => {
 
@@ -128,20 +129,22 @@ const Profile = () => {
 
             {!edit && (
               <>
-              <div>
-                <img
-                  src={userObj[0]}
-                  alt="owners dog pic"
-                  width="100px"
-                  height="100px"
-                />
+              <div className="profile-display">
+                <div>
+                  <img
+                    src={userObj[0]}
+                    alt="owners dog pic"
+                    width="100px"
+                    height="100px"
+                  />
+                </div>
+                <div>Name: {userObj[1]} </div>
+                <div>Species: {userObj[2]} </div>
+                <div>Size: {userObj[3]} </div>
+                <div>Breed: {userObj[4]} </div>
+                <div>Size: {userObj[5]} </div>
+                <button type="button" className="edit-button" onClick={onEdit}>Edit</button>
               </div>
-              <div>Name: {userObj[1]} </div>
-              <div>Species: {userObj[2]} </div>
-              <div>Size: {userObj[3]} </div>
-              <div>Breed: {userObj[4]} </div>
-              <div>Size: {userObj[5]} </div>
-              <button type="button" className="btn btn-outline-info" onClick={onEdit}>Edit</button>
               </>
             )}
 
@@ -202,8 +205,10 @@ const Profile = () => {
               name="picture"
               onChange={event => uploadimage(event.target.files)}
             />
-            <button className="sign-up-form-button" onSubmit={onSubmit}>Update</button>
-            <button type="button" className="btn btn-outline-info" onClick={onEdit}>Cancel</button>
+            <div className="buttons">
+              <button className="update-button" onSubmit={onSubmit}>Update</button>
+              <button type="button" className="cancel-button" onClick={onEdit}>Cancel</button>
+            </div>
             </>)}
           </section>
 

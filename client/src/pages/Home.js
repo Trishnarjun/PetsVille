@@ -74,44 +74,44 @@ const Home = () => {
       // };
       // profileDistances.push(profileDistance());
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
+
+      if (profile.user_id != sessionStorage.getItem("USER_ID")) {
+        //if (true) {
       return (
-        <>
-          {profile.user_id != sessionStorage.getItem("USER_ID") && (
-          <button
+          
+          <div
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
           >
-            {isShown != profile.id &&
-              profile.user_id != sessionStorage.getItem("USER_ID") && (
+            {isShown !== profile.id &&
+              profile.user_id !== sessionStorage.getItem("USER_ID") && (
                 <div className="profile-box">
                   <div>
                     <img
                       src={profile.picture}
                       alt="owners dog pic"
                       width="200px"
+                      height="200px"
                     />
                   </div>
+
                   <div>{profile.pet_name}</div>
                   <div>{Math.round(profile.distance * 10) / 10} Km</div>
                 </div>
               )}
             {isShown == profile.id &&
               profile.user_id != sessionStorage.getItem("USER_ID") && (
-                <>
                   <div className="profile-box">
                     <div>Size: {profile.size}</div>
                     <div>Breed: {profile.breed}</div>
                     <div>Kind: {profile.species}</div>
                     <div>Age: {profile.age}</div>
-                    <button onClick={routeChange}>Chat</button>
+                    <button className="chat-button" onClick={routeChange}>Chat</button>
                   </div>
-                  <div></div>
-                </>
               )}
-          </button>)
-          }
-        </>
-      );
+          </div>
+        
+      );}
     });
 
     
@@ -169,7 +169,6 @@ const Home = () => {
         </div>
         <div className="profiles">
           {profilesDisplay()}
-          <div />
         </div>
       </body>
     </>

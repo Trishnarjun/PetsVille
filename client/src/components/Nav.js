@@ -68,6 +68,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
         disabled={showModal}
         >Log in</button>}
 
+
       {sessionStorage.getItem("USER_ID") &&<button
         className="nav-button-profile"
         onClick={ navClick }
