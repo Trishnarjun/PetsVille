@@ -12,11 +12,22 @@ const Home = () => {
   const [mainOption, setMainOption] = useState("location");
   const [mainSpecies, setMainSpecies] = useState("Dog");
   const [mainAge, setMainAge] = useState("1");
-
+  const [lng, setlng] = useState(null);
+  const [lat, setlat] = useState(null);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setlat(position.coords.latitude);
+      setlng(position.coords.longitude);
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }, []);
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       console.log({ mainOption });
       let url = `http://localhost:3002/profiles?searchType=${mainOption}`;
+      url += `&lng=${lng}`;
+      url += `&lat=${lat}`;
       if (mainOption === "species") {
         url += `&species=${mainSpecies}`;
       }
@@ -24,10 +35,7 @@ const Home = () => {
         url += `&age=${mainAge}`;
       }
       try {
-        const axiosRes = await axios.get(
-          url
-          //"http://localhost:3002/profiles?searchType=species"
-        );
+        const axiosRes = await axios.get(url);
         axiosRes.data.sort((a, b) => a.distance - b.distance);
         setProfile(axiosRes.data);
       } catch (error) {
@@ -35,7 +43,7 @@ const Home = () => {
       }
     };
     fetchProfilesResponse();
-  }, [mainOption, mainSpecies, mainAge]);
+  }, [mainOption, mainSpecies, mainAge, lng, lat]);
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -72,44 +80,45 @@ const Home = () => {
       // };
       // profileDistances.push(profileDistance());
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
-      return (
-        <>
-          {profile.user_id != sessionStorage.getItem("USER_ID") && (
-            <div
-              onMouseEnter={() => setIsShown(profile.id)}
-              onMouseLeave={() => setIsShown(false)}
-            >
-              {isShown != profile.id &&
-                profile.user_id != sessionStorage.getItem("USER_ID") && (
-                  <div className="profile-box">
-                    <div>
-                      <img
-                        src={profile.picture}
-                        alt="owners dog pic"
-                        width="200px"
-                        height="200px"
-                      />
-                    </div>
-                    <div>{profile.pet_name}</div>
-                    <div>{Math.round(profile.distance * 10) / 10} Km</div>
+
+      if (profile.user_id != sessionStorage.getItem("USER_ID")) {
+        //if (true) {
+        return (
+          <div
+            onMouseEnter={() => setIsShown(profile.id)}
+            onMouseLeave={() => setIsShown(false)}
+          >
+            {isShown !== profile.id &&
+              profile.user_id !== sessionStorage.getItem("USER_ID") && (
+                <div className="profile-box">
+                  <div>
+                    <img
+                      src={profile.picture}
+                      alt="owners dog pic"
+                      width="200px"
+                      height="200px"
+                    />
                   </div>
-                )}
-              {isShown == profile.id &&
-                profile.user_id != sessionStorage.getItem("USER_ID") && (
-                  <>
-                    <div className="profile-box">
-                      <div>Size: {profile.size}</div>
-                      <div>Breed: {profile.breed}</div>
-                      <div>Kind: {profile.species}</div>
-                      <div>Age: {profile.age}</div>
-                      <button onClick={routeChange}>Chat</button>
-                    </div>
-                  </>
-                )}
-            </div>
-          )}
-        </>
-      );
+
+                  <div>{profile.pet_name}</div>
+                  <div>{Math.round(profile.distance * 10) / 10} Km</div>
+                </div>
+              )}
+            {isShown == profile.id &&
+              profile.user_id != sessionStorage.getItem("USER_ID") && (
+                <div className="profile-box">
+                  <div>Size: {profile.size}</div>
+                  <div>Breed: {profile.breed}</div>
+                  <div>Kind: {profile.species}</div>
+                  <div>Age: {profile.age}</div>
+                  <button className="chat-button" onClick={routeChange}>
+                    Chat
+                  </button>
+                </div>
+              )}
+          </div>
+        );
+      }
     });
 
   // console.log(profileDistances);
