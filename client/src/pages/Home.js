@@ -13,6 +13,7 @@ const Home = () => {
   const [mainSpecies, setMainSpecies] = useState("Dog");
   const [mainAge, setMainAge] = useState("1");
 
+  
   useEffect(() => {
     const fetchProfilesResponse = async () => {
       console.log({ mainOption });
@@ -43,14 +44,16 @@ const Home = () => {
     navigate(path);
   };
 
-  //const profileDistances = [];
-  const userLocations = [];
-  const profilesDisplay = () =>
+  const names =[];
+  profiles.map(profile => {
+    if (profile.user_id == sessionStorage.getItem("USER_ID")) {
+      names.push(profile.pet_name)
+    }
+  })
+
+
+  const profilesDisplay = () => 
     profiles.map((profile) => {
-      // if (profile.user_id === sessionStorage.getItem("USER_ID")) {
-      //   userLocations.push(profile.lat);
-      //   userLocations.push(profile.lng);
-      // }
       // const toRad = (d) => {
       //   return (d * Math.PI) / 180;
       // };
@@ -73,6 +76,7 @@ const Home = () => {
       console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
       return (
         <>
+          {profile.user_id != sessionStorage.getItem("USER_ID") && (
           <button
             onMouseEnter={() => setIsShown(profile.id)}
             onMouseLeave={() => setIsShown(false)}
@@ -104,15 +108,18 @@ const Home = () => {
                   <div></div>
                 </>
               )}
-          </button>
+          </button>)
+          }
         </>
       );
     });
 
+    
   // console.log(profileDistances);
+  console.log(names[0])
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} />
+      <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
       <body>
         <div className="search">
           <form className="search-form" action="/Home" method="GET"></form>
