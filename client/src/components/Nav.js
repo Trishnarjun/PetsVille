@@ -24,7 +24,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
   }
 
   
-  
+  //comments
 
   useEffect(() => {
     const fetchProfilesResponse = async () => {
