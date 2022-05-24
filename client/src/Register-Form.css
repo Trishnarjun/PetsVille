@@ -1,0 +1,75 @@
+section {
+  display: flex;
+  justify-content: space-around;
+  margin: 2px;
+  flex-direction: column;
+}
+.header {
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+.sign-up-form {
+  top: 175px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+  height: 400px;
+  background-color: #A9D5D6;
+  border-radius: 10px;
+  padding: 40px;
+}
+.form-box form {
+  display: flex-direction;
+  justify-content: center;
+}
+
+.form-box form section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.species, .size {
+  font-size: 15px;
+  height: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+
+.form-box input {
+  font-size: 15px;
+  height: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+
+.form-box form input {
+  padding: 10px;
+  margin: 10px;
+}
+
+.sign-up-form-button {
+  background-color: #28282af6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sign-up-form-button:hover {
+  opacity: 1;
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.24), 0 7px 25px 0 rgba(0, 0, 0, 0.19);
+}
+.sign-up-form-button:active {
+  background-color: #18181a;
+  box-shadow: 0 2px rgb(24, 23, 23);
+  transform: translateY(2px);
+}
