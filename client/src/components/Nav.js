@@ -73,7 +73,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignup}, props)
         className="nav-button-profile"
         onClick={ navClick }
         disabled={showModal}
-        ><img src={names[1]} alt="pet pic" width="50" height="50"/>{document.getElementsByClassName("header").length === 0 ? names[0] : "Home"} </button>
+        ><img src={names[1]} alt="pet pic" width="70" height="70"/>{document.getElementsByClassName("header").length === 0 ? names[0] : "Home"} </button>
       }
 
 

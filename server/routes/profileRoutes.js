@@ -2,18 +2,20 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../database");
 
-const searchByLocation = function (lng, lat) {
+const searchByLocation = async function  (lng, lat) {
   let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  $1::float), 2) + 
 POW(69.1 * ($2::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
   const values = [lat, lng];
-  return pool
-    .query(queryString, values)
-    .then((dbRes) => {
-      return dbRes.rows;
-    })
-    .catch((error) => console.error("query error", error.stack));
+  try {
+    const quarycall = await pool.query(queryString,values) 
+  return  quarycall.rows
+  } catch (error) {
+      console.log("1query error", error.stack)
+  }
+  
+    // .catch((error) => console.error("1query error", error.stack));
 };
-const searchBySpecies = function (species, lng, lat) {
+const searchBySpecies = async function (species, lng, lat) {
   let queryString = ` 
     SELECT profiles.*, SQRT(POW(69.1 * (users.lat::float -  $3::float), 2) + 
       POW(69.1 * ($2::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance 
@@ -22,12 +24,12 @@ const searchBySpecies = function (species, lng, lat) {
     WHERE species = $1 
     ORDER BY distance `;
   const values = [species, lng, lat];
-  return pool
-    .query(queryString, values)
-    .then((dbRes) => {
-      return dbRes.rows;
-    })
-    .catch((error) => console.error("query error", error.stack));
+  try {
+    const quarycall = await pool.query(queryString,values) 
+  return  quarycall.rows
+  } catch (error) {
+      console.log("2query error", error.stack)
+  }
 };
 const searchByAge = function (age, lng, lat) {
   let queryString = ` 
@@ -43,7 +45,7 @@ const searchByAge = function (age, lng, lat) {
     .then((dbRes) => {
       return dbRes.rows;
     })
-    .catch((error) => console.error("query error", error.stack));
+    .catch((error) => console.error("3query error", error.stack));
 };
 //create profile
 router.post("/", (req, res) => {

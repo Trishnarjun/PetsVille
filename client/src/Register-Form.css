@@ -29,6 +29,13 @@ section {
   padding: 20px;
 }
 
+.species, .size {
+  font-size: 15px;
+  height: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+
 .form-box input {
   font-size: 15px;
   height: 25px;

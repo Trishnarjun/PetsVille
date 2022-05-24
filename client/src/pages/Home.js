@@ -40,11 +40,10 @@ const Home = () => {
     fetchProfilesResponse();
   }, [mainOption, mainSpecies, mainAge, lng, lat]);
 
-
+  // rename this to something unique 
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = `/conversation`;
-    navigate(path);
+    navigate(`/conversation`);
   };
 
   const names = [];
@@ -131,6 +130,7 @@ const Home = () => {
               id="searchAgeType"
               onChange={(e) => setMainAge(e.target.value)}
             >
+              {/* make this to a map instead */}
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>

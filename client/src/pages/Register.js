@@ -71,23 +71,20 @@ const Register = () => {
               value={data.pet_name}
             />
             <br />
-            <input
-              type="text"
-              name="species"
-              placeholder="species"
-              required={true}
-              onChange={onChange}
-              value={data.species}
-            />
+            <select className="species" name="species" onChange={onChange} value={data.value}>
+              <option value="" default hidden>Species</option>
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+              <option value="Hamster">Hamster</option>
+              <option value="Snake">Snake</option>
+            </select>
             <br />
-            <input
-              type="text"
-              name="size"
-              placeholder="size"
-              required={true}
-              onChange={onChange}
-              value={data.size}
-            />
+            <select className="size" name="size" onChange={onChange} value={data.value}>
+              <option value="" default hidden>Size</option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+            </select>
             <br />
             <input
               type="text"

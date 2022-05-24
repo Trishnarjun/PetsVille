@@ -115,6 +115,14 @@
   
 }
 
+.species, .size {
+  font-size: 15px;
+  height: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+
+
 .update-button:hover{
   background-color: #0bf0d1;
   box-shadow: 0px 15px 20px rgba(0, 255, 255, 0.4);

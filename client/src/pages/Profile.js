@@ -95,7 +95,7 @@ const Profile = () => {
     
     })
   }
-  
+
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
@@ -137,23 +137,20 @@ const Profile = () => {
               value={data.pet_name}
             />
             <br />
-            <input
-              type="text"
-              name="species"
-              placeholder="species"
-              required={true}
-              onChange={onChange}
-              value={data.species}
-            />
+            <select className="species" name="species" onChange={onChange} value={data.value}>
+            <option value={userObj[2]} default hidden>{userObj[2]}</option>
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+              <option value="Hamster">Hamster</option>
+              <option value="Snake">Snake</option>
+            </select>
             <br />
-            <input
-              type="text"
-              name="size"
-              placeholder="size"
-              required={true}
-              onChange={onChange}
-              value={data.size}
-            />
+            <select className="size" name="Size" onChange={onChange} value={data.value}>
+            <option value={userObj[3]} default hidden>{userObj[3]}</option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+            </select>
             <br />
             <input
               type="text"
@@ -173,7 +170,6 @@ const Profile = () => {
               required={true}
               onChange={onChange}
               value={data.age}
-              
             />
             <br />
             <label for="uploads">Choose an image you want to upload:</label>
