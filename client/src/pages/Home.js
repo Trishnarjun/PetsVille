@@ -6,8 +6,6 @@ import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const [profiles, setProfile] = useState([]);
-  // for filtering by distace //
-  //const [distanceIndex, setDistanceIndex] = useState([])
   const [isShown, setIsShown] = useState(false);
   const [mainOption, setMainOption] = useState("location");
   const [mainSpecies, setMainSpecies] = useState("Dog");
@@ -18,13 +16,10 @@ const Home = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setlat(position.coords.latitude);
       setlng(position.coords.longitude);
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
     });
   }, []);
   useEffect(() => {
     const fetchProfilesResponse = async () => {
-      console.log({ mainOption });
       let url = `http://localhost:3002/profiles?searchType=${mainOption}`;
       url += `&lng=${lng}`;
       url += `&lat=${lat}`;
@@ -61,29 +56,7 @@ const Home = () => {
 
   const profilesDisplay = () =>
     profiles.map((profile) => {
-      // const toRad = (d) => {
-      //   return (d * Math.PI) / 180;
-      // };
-
-      // const profileDistance = () => {
-      //   const R = 6371;
-      //   const dLat = toRad(parseFloat(profile.lat) - userLocations[0]);
-      //   const dLng = toRad(parseFloat(profile.lng) - userLocations[1]);
-      //   const a =
-      //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      //     Math.cos(toRad(userLocations[0])) *
-      //       Math.cos(toRad(profile.lat)) *
-      //       Math.sin(dLng / 2) *
-      //       Math.sin(dLng / 2);
-      //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      //   var d = R * c;
-      //   return d; // distance in KM
-      // };
-      //profileDistances.push(profileDistance());
-      console.log(sessionStorage.getItem("USER_ID"), profile.user_id);
-
       if (profile.user_id != sessionStorage.getItem("USER_ID")) {
-        //if (true) {
         return (
           <div
             onMouseEnter={() => setIsShown(profile.id)}
@@ -121,9 +94,6 @@ const Home = () => {
         );
       }
     });
-
-  // console.log(profileDistances);
-  console.log(names[0]);
   return (
     <>
       <Nav
@@ -186,4 +156,3 @@ const Home = () => {
 };
 export default Home;
 
-//password: $2a$10$xO3hu6O3E8YorPzQqKyMyuSZoAyG9VQKfO4GePL//eZMhv9lNAl8K
