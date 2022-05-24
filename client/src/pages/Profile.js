@@ -100,7 +100,7 @@ const Profile = () => {
     axios
       .post("https://api.cloudinary.com/v1_1/petsville-1/image/upload", formdata).then((response) => {
         
-      console.log(response.data.url)
+      console.log("This is the user for cloudinary:",response.data.url)
       setData((prev) => {
         return {...prev, picture: response.data.url}
       })
@@ -122,7 +122,7 @@ const Profile = () => {
     <>
       {/* onSubmit={onSubmit} */}
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
-      <div className="sign-up-form">
+      <div className="edit-form">
         <form className="form-box" onSubmit={onSubmit} > 
           <section>
             <h3 className="header">{edit ? "Edit Profile" : "Profile"}</h3>

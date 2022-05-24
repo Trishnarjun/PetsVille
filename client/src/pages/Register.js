@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Nav from "../components/Nav";
+import Nav2 from "../components/Nav2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Register-Form.css";
@@ -60,7 +60,7 @@ const Register = () => {
 
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} />
+      <Nav2 minimal={true} setShowModal={() => {}} showModal={false} />
       <div className="sign-up-form">
         <form className="form-box" onSubmit={onSubmit}>
           <section>
@@ -122,7 +122,7 @@ const Register = () => {
 
           <button className="sign-up-form-button">Sign Up</button>
         </form>
-      </div>
+        </div>
     </>
   );
 };
