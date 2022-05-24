@@ -11,7 +11,6 @@ html, body {
   
     font-family: 'comfortaa', sans-serif;
     font-weight: 900;
-  /* font-family: 'comfortaa', sans-serif; */
 }
 
 .primary-title {
@@ -85,16 +84,12 @@ nav {
   width: 8rem;
   border-width: 2px;
   color:white;
-  /* border-style: solid; */
-  /* border-color: rgb(255,255,255); */
   background:linear-gradient(87deg, rgb(255 150 12), rgb(220 104 202));
   background-color: transparent;
 }
 
 nav .nav-button:disabled {
   background: linear-gradient(rgb(180, 180, 180), rgb(180, 180, 180));
-  /* background-color: rgb(180, 180, 180);
-  color:rgb(253, 253, 253); */
 }
 
 nav .logo-container {

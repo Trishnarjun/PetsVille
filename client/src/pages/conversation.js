@@ -9,8 +9,6 @@ import Nav from "../components/Nav";
 const socket = io.connect("http://localhost:3002");
 
 const Conversation = () => {
-  //const [username, setUsername] = useState("");
-  //const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [profiles, setProfile] = useState([]);
 
@@ -29,13 +27,10 @@ const Conversation = () => {
     fetchProfilesResponse();
   }, []);
 
-  // setUsername()
+  
   sessionStorage.getItem("USER_ID");
-  console.log(sessionStorage.getItem("USER_ID"));
   let usernames = [];
   profiles.map((profile) => {
-    console.log("map:", profile);
-    console.log("conversations:", sessionStorage.getItem("USER_ID"));
     if (profile.user_id == sessionStorage.getItem("USER_ID")) {
       usernames.push(profile.pet_name);
     }
@@ -48,8 +43,6 @@ const Conversation = () => {
     }
   })
 
-  console.log(profiles);
-
   const joinRoom = () => {
     if (usernames[0] !== "" && room !== "") {
       socket.emit("join_room", room);
@@ -57,7 +50,6 @@ const Conversation = () => {
     }
   };
 
-  console.log(usernames);
 
   return (
     <>
@@ -66,20 +58,6 @@ const Conversation = () => {
       {!showChat ? (
         <div className="joinChatContainer">
           <h3>Conversation</h3>
-          {/* <input
-      type="text"
-      placeholder="name"
-      onChange={(event) => {
-        setUsername(event.target.value);
-      }}
-    /> */}
-          {/* <input
-      type="text"
-      placeholder="room"
-      onChange={(event) => {
-        setRoom(event.target.value);
-      }}
-    /> */}
           <button onClick={joinRoom}>Start Chat!</button>
         </div>
       ) : (
