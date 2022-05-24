@@ -3,11 +3,12 @@ const router = express.Router();
 const pool = require("../database");
 
 const searchByLocation = function (lng, lat) {
-  let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  lng::float), 2) + 
-POW(69.1 * (lat::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
-  const values = [lng, lat];
+  console.log(lng, lat);
+  let queryString = ` select profiles.*, SQRT(POW(69.1 * (users.lat::float -  $1::float), 2) + 
+POW(69.1 * ($2::float - users.lng::float) * COS(users.lat::float / 57.3), 2)) AS distance FROM profiles INNER JOIN users ON profiles.user_id = users.id ORDER BY distance`;
+  const values = [lat, lng];
   return pool
-    .query(queryString)
+    .query(queryString, values)
     .then((dbRes) => {
       return dbRes.rows;
     })
@@ -51,7 +52,6 @@ router.post("/", (req, res) => {
 
   // function to make get url for uploaded piction maybe api
 
-
   console.log(req.body);
   pool
     .query(
@@ -71,7 +71,7 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   const { searchType, lng, lat, species, age } = req.query;
 
-  console.log(req.query);
+  console.log(`hello world${lng},--------${lat}`);
   if (searchType === "location") {
     searchByLocation(lng, lat).then((results) => {
       res.json(results);
@@ -91,8 +91,8 @@ router.get("/", (req, res) => {
 
 //update profiles
 router.post("/update", (req, res) => {
-  const {user_id, pet_name, size, breed, species, age, picture} = req.body;
-  console.log(req.body)
+  const { user_id, pet_name, size, breed, species, age, picture } = req.body;
+  console.log(req.body);
   pool
     .query(
       "UPDATE profiles SET pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
