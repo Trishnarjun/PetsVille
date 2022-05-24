@@ -87,10 +87,6 @@ router.get("/", (req, res) => {
 router.post("/update", (req, res) => {
   const { user_id, pet_name, size, breed, species, age, picture } = req.body;
   pool
-    .query(
-      "UPDATE profiles SET pet_name = $1, size = $2, breed = $3, species = $4, age = $5, picture = $6 WHERE user_id = $7",
-      [pet_name, size, breed, species, age, picture, user_id]
-    )
     .then((chats) => {})
     .catch((err) => {
       res.send(err).status(400);
