@@ -6,6 +6,7 @@ import "../Register-Form.css";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [mainSpecies, setMainSpecies] = useState("Dog");
   const [data, setData] = useState({
     pet_name: "",
     species: "",
@@ -77,8 +78,7 @@ const Register = () => {
             <select
               className="species"
               id="species"
-              onChange={onChange}
-              value={data.species}
+              onChange={(e) => setData(e.target.value)}
             >
               <option value="Dog">Dog</option>
               <option value="Cat">Cat</option>
@@ -90,35 +90,27 @@ const Register = () => {
               className="size"
               id="size"
               placeholder="size"
-              onChange={onChange}
-              value={data.size}
+              onChange={(e) => setData(e.target.value)}
             >
-              <option value="ExtraLarge">XL</option>
-              <option value="Large">L</option>
-              <option value="Medium">M</option>
-              <option value="Small">S</option>
-              <option value="ExtraSmall">XS</option>
+              <option value="Large">Large</option>
+              <option value="Medium">Medium</option>
+              <option value="Small">Small</option>
             </select>
             <br />
-            <select
-              className="breed"
-              id="breed"
+            <input
+              type="text"
+              name="breed"
               placeholder="breed"
+              required={true}
               onChange={onChange}
               value={data.breed}
-            >
-              <option value="Bulldog">Bulldog</option>
-              <option value="Labrador Retriever">Labrador Retriever</option>
-              <option value="German Shepard">German Shepard</option>
-              <option value="Poodle">Poodle</option>
-              <option value="Chihuahua">Chihuahua</option>
-              <option value="French Bulldog">French Bulldog</option>
-              <option value="Border Collie">Border Collie</option>
-            </select>
+            />
             <br />
             <input
               id="age"
               type="number"
+              min="0"
+              max="15"
               name="age"
               placeholder="age"
               required={true}
