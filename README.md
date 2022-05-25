@@ -19,8 +19,6 @@
 
 ![Screen Shot 2022-05-25 at 6 37 05 PM](https://user-images.githubusercontent.com/96452610/170381616-902a7d51-c388-4c8f-b07f-1e95d04dd156.png)
 
-![Screen Shot 2022-05-25 at 6 37 08 PM](https://user-images.githubusercontent.com/96452610/170381666-8e35f40d-9396-44e7-8070-e12803b61b72.png)
-
 ![Screen Shot 2022-05-25 at 6 37 15 PM](https://user-images.githubusercontent.com/96452610/170381688-449e6cbb-5606-451f-841e-f6f39a5f7fcd.png)
 
 
