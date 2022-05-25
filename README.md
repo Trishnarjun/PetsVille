@@ -41,4 +41,5 @@ npm start
 * Express.js
 * Socket.io
 * Nodemon
+* Postgresql
 
