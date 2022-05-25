@@ -31,3 +31,13 @@ Install Dependencies with `npm install`.
 npm start
 ```
 
+## Dependencies
+
+* Axios
+* React
+* React-Dom
+* React-Router-Dom
+* Node.js
+* Express.js
+* Socket.io
+
