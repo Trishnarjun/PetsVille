@@ -40,4 +40,5 @@ npm start
 * Node.js
 * Express.js
 * Socket.io
+* Nodemon
 
