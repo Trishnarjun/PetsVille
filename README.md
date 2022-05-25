@@ -7,8 +7,6 @@
 
 ![Screen Shot 2022-05-25 at 6 32 11 PM](https://user-images.githubusercontent.com/96452610/170381514-cbcfcd42-29b0-49d8-8009-a114379cf14e.png)
 
-![Screen Shot 2022-05-25 at 6 32 23 PM](https://user-images.githubusercontent.com/96452610/170381540-8767f55e-b5bb-4c69-bf70-2c8295ba72ec.png)
-
 ![Screen Shot 2022-05-25 at 6 32 40 PM](https://user-images.githubusercontent.com/96452610/170381564-672d9792-e420-4da2-9a11-27f21a4e7209.png)
 
 ![Screen Shot 2022-05-25 at 6 32 52 PM](https://user-images.githubusercontent.com/96452610/170381571-3d1f3c14-13eb-4ed4-b676-7252139bd1af.png)
