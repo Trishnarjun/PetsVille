@@ -15,13 +15,14 @@ const Register = () => {
     picture: "",
   });
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
+    
     const dataToSend = { ...data, user_id: sessionStorage.getItem("USER_ID") };
     axios
       .post("http://localhost:3002/profiles", dataToSend)
       .then(function (response) {
-      uploadimage();
+        uploadimage();
       })
       .catch(function (error) {
         console.log(error);
@@ -40,6 +41,8 @@ const Register = () => {
 
   const uploadimage = (files) => {
     const formdata = new FormData();
+    console.log(formdata);
+    console.log(files)
     formdata.append("file", files[0]);
     formdata.append("upload_preset", "vjuxaevv");
     axios
@@ -47,11 +50,24 @@ const Register = () => {
         "https://api.cloudinary.com/v1_1/petsville-1/image/upload",
         formdata
       )
-      .then((response) => {
+      .then( (response) => {
+        console.log(response)
+        // const sleep = ms => new Promise(r => setTimeout(r, ms));
+        
+        let ImageURL = response.data.secure_url
+        
+        console.log(ImageURL)
+
         setData((prev) => {
-          return { ...prev, picture: response.data.url };
+          return { ...prev, picture: ImageURL };
         });
+        
+      
       });
+
+      
+      
+
   };
 
   return (

@@ -32,6 +32,7 @@ const Home = () => {
       try {
         const axiosRes = await axios.get(url);
         axiosRes.data.sort((a, b) => a.distance - b.distance);
+        console.log(axiosRes)
         setProfile(axiosRes.data);
       } catch (error) {
         console.log("error: ", error);

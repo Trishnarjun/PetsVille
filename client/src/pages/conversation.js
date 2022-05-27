@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "../conversations.css";
 import axios from "axios";
-import Nav from "../components/Nav";
+import Nav3 from "../components/Nav3";
 
 
 const socket = io.connect("http://localhost:3002");
@@ -53,7 +53,7 @@ const Conversation = () => {
 
   return (
     <>
-    <Nav minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
+    <Nav3 minimal={true} setShowModal={() => {}} showModal={false} name={names[0]} />
     <div className="conversation">
       {!showChat ? (
         <div className="joinChatContainer">

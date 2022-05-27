@@ -59,10 +59,13 @@ body {
 }
 
 @media (max-width: 800px) {
+
   .profiles {
-    flex-direction: column;
-    margin: 0%;
-    margin: 0% 0% 0%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0% 30% 0%;
+    gap: 60px;
   }
 }
 
